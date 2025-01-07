@@ -3,6 +3,7 @@ from flask import render_template
 from flask import Flask, request, jsonify
 from markupsafe import Markup
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
@@ -48,7 +49,9 @@ def contato():
 def atualizacoes():
     return render_template("atualizacoes.html")
 def login(usuario, senha):
-    
+    chrome_driver_path = "/caminho/para/o/chromedriver"
+    service = Service(chrome_driver_path)
+    navegador = webdriver.Chrome(service=service, options=chrome_options)
     app = Flask(__name__)
     chrome_options = Options()
     chrome_options.add_argument("--headless")  # Ativar modo headless
