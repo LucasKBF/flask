@@ -10,6 +10,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
 from bs4 import BeautifulSoup
+import chromedriver_autoinstaller
 import time
 import re
 import os
@@ -49,7 +50,7 @@ def contato():
 def atualizacoes():
     return render_template("atualizacoes.html")
 def login(usuario, senha):
-    
+    chromedriver_autoinstaller.install()
     app = Flask(__name__)
     chrome_options = Options()
     chrome_options.add_argument("--headless")  # Ativar modo headless
@@ -57,8 +58,7 @@ def login(usuario, senha):
     chrome_options.add_argument("--window-size=1920x1080")  # Definir resolução
     chrome_options.add_argument("--no-sandbox")  # Necessário em alguns sistemas
     chrome_options.add_argument("--disable-dev-shm-usage")  # Prevenir problemas de memória
-    service = Service(r'\chromedriver_dir\chromedriver.exe')  # Substitua pelo caminho real do ChromeDriver
-    navegador = webdriver.Chrome(service=service, options=chrome_options)
+    navegador = webdriver.Chrome(options=chrome_options)
     def separar_data_horario(data_envio):
         # Expressão regular para capturar a data e o horário no formato dd/mm/aaaaHH:MM
         match = re.match(r"(\d{2}/\d{2}/\d{4})(\d{2}:\d{2})", data_envio)
