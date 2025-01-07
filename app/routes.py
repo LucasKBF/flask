@@ -49,7 +49,7 @@ def contato():
 def atualizacoes():
     return render_template("atualizacoes.html")
 def login(usuario, senha):
-    chrome_driver_path = "/caminho/para/o/chromedriver"
+    chrome_driver_path = r"C:\\Users\\lucas\\OneDrive\\Área de Trabalho\\flask\\chromedriver\\chromedriver.exe"
     service = Service(chrome_driver_path)
     navegador = webdriver.Chrome(service=service, options=chrome_options)
     app = Flask(__name__)
