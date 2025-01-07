@@ -1,15 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SigaaV2 - [Login]</title>
+  <link rel="stylesheet" href="\static\login.css"> 
+
 </head>
 <body>
-    <form action="/autenticar" method="post">
-    Usuario: <input type="text" name="usuario"><br>
-    Senha: <input type="password" name="senha"><br>
-    <button type="submit">Entrar</button>   
+  <header>
+    <a class="inicio" href="http://127.0.0.1:5000/index">SigaaV2</a>
+  </header>
+  
+  <main class="login">
+    <form action="/dashboard" method="post">
+        Usuario:<br> <input type="text" name="usuario" id="usuario" required><br><br>
+        Senha: <br> <div class="form-group">
+            <input type="password" id="senha" placeholder="Digite sua senha" name="senha" required>
+        <br><br>
+        <div class="checkbox">
+            <input type="checkbox" id="mostrarSenha" onclick="toggleSenha()">
+            <label for="mostrarSenha">Mostrar senha</label>
+        </div>
+        <br>
+        <button onclick="validarFormulario()" type="submit">Entrar</button>   
     </form>
+    <div id="loading" class="hidden">
+      <div class="spinner"></div>
+      <p class="details" id="loadingDetails">Preparando...</p>
+      <script>
+        processo
+      </script>     
+  </div>
+    {{ erro|safe }} 
+
+  </main>
 </body>
 </html>
+
+<script>
+    function toggleSenha() {
+      const senha = document.getElementById("senha");
+      // Alterna entre os tipos "password" e "text"
+      if (senha.type === "password") {
+        senha.type = "text";
+      } else {
+        senha.type = "password";
+      }
+    }
+    function loading(){
+      const loadingDiv = document.getElementById("loading");
+      loadingDiv.classList.remove("hidden"); 
+      const details = document.getElementById("loadingDetails");
+            details.textContent = "Conectando ao Sigaa...";
+            
+            setTimeout(() => {
+                details.textContent = "Acessando: BIOLOGIA";
+            }, 5000);
+            setTimeout(() => {
+                details.textContent = "Acessando: ELETRICIDADE I";
+            }, 10000);
+            setTimeout(() => {
+                details.textContent = "Acessando: FILOSOFIA E SOCIOLOGIA";
+            }, 12500);
+            setTimeout(() => {
+                details.textContent = "Acessando: FÍSICA";
+            }, 15000);
+            setTimeout(() => {
+                details.textContent = "Acessando: INGLÊS";
+            }, 17500);
+            setTimeout(() => {
+                details.textContent = "Acessando: MATEMÁTICA";
+            }, 20000);
+            setTimeout(() => {
+                details.textContent = "Acessando: ARTES";
+            }, 22500);
+            setTimeout(() => {
+                details.textContent = "Acessando: PORTUGUÊS E HISTÓRIA DA LITERATURA BRASILEIRA";
+            }, 25000);
+            setTimeout(() => {
+                details.textContent = "Acessando: QUÍMICA";
+            }, 27500);
+            setTimeout(() => {
+                details.textContent = "Acessando: EDUCAÇÃO FÍSICA";
+            }, 30000);
+            setTimeout(() => {
+                details.textContent = "Quase lá...";
+            }, 32500);
+    }
+
+    function validarFormulario() {
+            // Obtém os valores dos campos
+            const usuario = document.getElementById("usuario").value.trim();
+            const senha = document.getElementById("senha").value.trim();
+
+            // Validação simples
+            if (usuario === "") {
+                return;
+            }
+            if (senha === "") {
+                return;
+            }
+          loading()
+          var processo = "a"
+    }
+  </script>
+  
