@@ -10,7 +10,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
 from bs4 import BeautifulSoup
-import chromedriver_autoinstaller
 import time
 import re
 import os
@@ -50,7 +49,6 @@ def contato():
 def atualizacoes():
     return render_template("atualizacoes.html")
 def login(usuario, senha):
-    chromedriver_autoinstaller.install()
     app = Flask(__name__)
     chrome_options = Options()
     chrome_options.add_argument("--headless")  # Ativar modo headless
