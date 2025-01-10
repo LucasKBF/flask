@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/sigaa.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header>
+        <h1 ><a class="inicio" href="/index">SigaaV2</a></h1>
+        <nav>
+            <a href="/contato">Contato</a>
+            <a href="/atualizacoes">Atualizações</a>
+            <a href="/sobre">Sobre</a>
+            <a href="/segurança">Segurança</a>
+            <a href="/creditos">Creditos</a>
+            <a href="/autenticar">Entrar</a>
+        </nav>
+      </header>
+    <h1>Notas</h1>
+    {{ notas|safe }}
+</body>
+</html>
