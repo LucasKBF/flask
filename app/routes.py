@@ -1,6 +1,6 @@
 from app import app
 from flask import render_template
-from flask import Flask, request, jsonify, redirect, url_for, flash
+from flask import Flask, request, jsonify, redirect, url_for, flash, send_from_directory
 from markupsafe import Markup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -17,6 +17,26 @@ import time
 import re
 import os
 from app.config import *
+import asyncio
+import aiohttp
+
+em_manutencao = False
+@app.before_request
+def verifica_manutencao():
+    global em_manutencao
+    if em_manutencao and not (request.endpoint == 'manutencao'):
+        return redirect(url_for('manutencao'))
+
+@app.route('/manutencao')
+def manutencao():
+    if em_manutencao == False:
+        return redirect(url_for('index'))
+    else:
+        return render_template('manutenção.html')
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory('static', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route("/")
 @app.route("/index")
@@ -44,12 +64,15 @@ def autenticar():
 @app.route("/sobre")
 def sobre():
     return render_template("sobre.html")
+
 @app.route("/creditos")
 def creditos():
     return render_template("creditos.html")
+
 @app.route("/segurança")
 def segurança():
     return render_template("segurança.html")
+
 
 @app.route('/contato', methods=['GET', 'POST'])
 def contato():
@@ -98,6 +121,8 @@ def email():
 @app.route("/atualizacoes")
 def atualizacoes():
     return render_template("atualizacoes.html")
+
+
 def login(usuario, senha):
     app = Flask(__name__)
     chrome_options = Options()
@@ -258,4 +283,25 @@ def login(usuario, senha):
     # Exibir os nomes coletados
     print("Nomes das turmas coletados:", nomes_turmas)
     navegador.close
-    return resultado
+    soup = BeautifulSoup(resultado, 'html.parser')
+
+    # Iterar por todas as tabelas
+    for table in soup.find_all('table'):
+        # Encontrar os índices das colunas "Matrícula" e "Nome" no cabeçalho
+        headers = table.find('tr').find_all('th')
+        indices_to_remove = []
+        
+        for index, header in enumerate(headers):
+            if header.text.strip().lower() in ['matrícula', 'nome', 'sit.']:
+                indices_to_remove.append(index)
+
+        # Remover as colunas correspondentes nas linhas da tabela   
+        for row in table.find_all('tr'):
+            cells = row.find_all(['th', 'td'])
+            for index in sorted(indices_to_remove, reverse=True):
+                if index < len(cells):
+                    cells[index].decompose()
+
+    # Resultado atualizado
+    resultado2 = str(soup)
+    return resultado2
