@@ -17,7 +17,7 @@ def verifica_manutencao():
 @app.route('/manutencao')
 def manutencao():
     if em_manutencao=="False":
-        return redirect(url_for('index'))
+        return redirect(url_for('@'))
     else:
         return render_template('manutenção.html')
 
@@ -26,7 +26,7 @@ def favicon():
     return send_from_directory('static', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route("/")
-@app.route("/index")
+@app.route("@")
 def index():
     return render_template("index.html")
 
@@ -364,12 +364,8 @@ def login(usuario, senha):
 #region Imprime o nome da turma
             x += 1  
             #endregion
-#region Incrementa x
-  
-    
-    #endregion
 #region Diretório específicoa
-    log_dir = r"C:\Users\lucas\OneDrive\Área de Trabalho\sigab\arquivos"
+    log_dir = r"C:\Users\lucas\OneDrive\SigaaV2\log.txt"
     os.makedirs(log_dir, exist_ok=True)  
     #endregion
 #region Cria o diretório se não existir
