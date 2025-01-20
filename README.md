@@ -16,10 +16,15 @@ Acesse o projeto em: [https://sigaav2.com.br](https://sigaav2.com.br)
 
 ---
 
+### **Equipe**
+- **Lucas K. B. F.**
+- **[Nosferk](https://github.com/Nosferk)**
+
+---
+
 ### **Recursos Principais**
 - **Interface limpa e moderna**: foco na usabilidade e estética.
 - **Melhoria na navegação**: organização das funcionalidades mais utilizadas.
-- **Compatível com dispositivos modernos**: design responsivo para acesso em celulares, tablets e desktops.
 
 ---
 
@@ -50,7 +55,6 @@ Access the project at: [https://sigaav2.com.br](https://sigaav2.com.br)
 ### **Main Features**
 - **Modern and clean interface**: designed for usability and aesthetics.
 - **Enhanced navigation**: organizes frequently used functionalities.
-- **Responsive design**: works seamlessly on mobile, tablet, and desktop devices.
 
 ---
 
