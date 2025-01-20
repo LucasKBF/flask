@@ -163,6 +163,10 @@ color:rgb(255, 0, 0);
 padding: 0px 0px;
 font-size: 14px;
 }
+
+.title {
+  font-size: 30px;
+}
 /* Media Queries */
 @media (max-width: 768px) {
   header, footer {

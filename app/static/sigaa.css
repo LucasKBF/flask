@@ -52,18 +52,6 @@ h1,h2,h3,h4,h5,h6,form,p {
 }
 
 h1 {font-size: 1.5em;}
-h2, h2#title{
-	font-size: 1.2em;
-	color: #003395;
-	font-variant: small-caps;
-	margin: 0 0px 15px;
-	/*margin: 0 5px 15px;*/
-	border-bottom: 1px solid #C4D2EB;
-	padding: 4px 0 2px 22px;
-	letter-spacing: 0px;
-	text-align: left;
-	background: #EFF3FA;
-}
 
 
 h3 {font-size: 1.2em; }
@@ -1837,7 +1825,7 @@ td{
 }
 
 #relatorio h2{
-	background: #FFFFFF;
+	background: #ffffff;
 	/*border-bottom:1px solid #000000;*/
 	border-bottom:0px;
 	color:#000000;

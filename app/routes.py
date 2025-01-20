@@ -1,35 +1,20 @@
-from app import app
-from flask import render_template
-from flask import Flask, request, jsonify, redirect, url_for, flash, send_from_directory
-from markupsafe import Markup
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.service import Service
-from bs4 import BeautifulSoup
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-import time
-import re
-import os
 from app.config import *
-import asyncio
-import aiohttp
 
-em_manutencao = False
+with open(r"C:\Users\lucas\OneDrive\Área de Trabalho\SigaaV2\app\manu.txt", "r") as arquivo:
+    manu = arquivo.read()
+    em_manutencao = manu
+
+
 @app.before_request
 def verifica_manutencao():
     global em_manutencao
-    if em_manutencao and not (request.endpoint == 'manutencao'):
+    # Ignorar requisições para arquivos estáticos
+    if em_manutencao == "True" and not (request.endpoint == 'manutencao' or request.endpoint.startswith('static')):
         return redirect(url_for('manutencao'))
 
 @app.route('/manutencao')
 def manutencao():
-    if em_manutencao == False:
+    if em_manutencao=="False":
         return redirect(url_for('index'))
     else:
         return render_template('manutenção.html')
@@ -292,7 +277,7 @@ def login(usuario, senha):
         indices_to_remove = []
         
         for index, header in enumerate(headers):
-            if header.text.strip().lower() in ['matrícula', 'nome', 'sit.']:
+            if header.text.strip().lower() in ['matrícula', 'nome']:
                 indices_to_remove.append(index)
 
         # Remover as colunas correspondentes nas linhas da tabela   

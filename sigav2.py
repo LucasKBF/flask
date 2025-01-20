@@ -1,7 +1,9 @@
 import sys
 import os
 from app import app
-
+import ctypes
+titulo = "SigaaV2"
+ctypes.windll.kernel32.SetConsoleTitleW(titulo)
 
 
 if __name__ == "__main__":
