@@ -30,7 +30,7 @@
       <div class="spinner"></div>
       <p class="details" id="loadingDetails">Preparando...</p>   
   </div>
-    {{ erro|safe }} 
+   <!-- {{ erro|safe }} -->
   </main>
 </body>
 </html>
@@ -50,40 +50,10 @@
       loadingDiv.classList.remove("hidden"); 
       const details = document.getElementById("loadingDetails");
             details.textContent = "Conectando ao Sigaa...";
-            
+
             setTimeout(() => {
-                details.textContent = "Acessando: BIOLOGIA";
-            }, 5000);
-            setTimeout(() => {
-                details.textContent = "Acessando: ELETRICIDADE I";
-            }, 10000);
-            setTimeout(() => {
-                details.textContent = "Acessando: FILOSOFIA E SOCIOLOGIA";
-            }, 12500);
-            setTimeout(() => {
-                details.textContent = "Acessando: FÍSICA";
-            }, 15000);
-            setTimeout(() => {
-                details.textContent = "Acessando: INGLÊS";
-            }, 17500);
-            setTimeout(() => {
-                details.textContent = "Acessando: MATEMÁTICA";
-            }, 20000);
-            setTimeout(() => {
-                details.textContent = "Acessando: ARTES";
-            }, 22500);
-            setTimeout(() => {
-                details.textContent = "Acessando: PORTUGUÊS E HISTÓRIA DA LITERATURA BRASILEIRA";
-            }, 25000);
-            setTimeout(() => {
-                details.textContent = "Acessando: QUÍMICA";
-            }, 27500);
-            setTimeout(() => {
-                details.textContent = "Acessando: EDUCAÇÃO FÍSICA";
-            }, 30000);
-            setTimeout(() => {
-                details.textContent = "Quase lá...";
-            }, 32500);
+                details.textContent = "Buscando Notas";
+            }, 127500);
     }
 
     function validarFormulario() {

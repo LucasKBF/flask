@@ -7,7 +7,7 @@ ctypes.windll.kernel32.SetConsoleTitleW(titulo)
 
 
 if __name__ == "__main__":
-    # Define a porta, usando 5000 como padrão se não estiver definida
-    port = int(os.getenv("PORT", 5000))  # Note que o padrão é 5000 como número, não string
+    # Define a porta usando 5000
+    port = int(os.getenv("PORT", 5000)) 
     app.run(host="0.0.0.0", port=port, debug=True)
 
