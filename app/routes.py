@@ -237,19 +237,18 @@ def login(usuario, senha):
 
 #endregion
 #region Ver se a senha ta errada
-    WebDriverWait(navegador, 4)
-    if EC.presence_of_element_located((By.XPATH, '//*[@id="conteudo"]/center[2]')):
-        return "senha errada"
+    elements = navegador.find_elements(By.XPATH, "//center[@style='color: #922; font-weight: bold;' and text()='Usuário e/ou senha inválidos']")
+    
+    if elements:
+        print("Elemento encontrado!")
+    else:
+        print("Elemento não encontrado!")
 
 
-    
-    #endregion
-#region Esperar a página carregar após o login
-    WebDriverWait(navegador, 10).until(EC.presence_of_element_located((By.XPATH, "//table/tbody/tr")))
-    
 
     
     #endregion
+
 #region Tratar alertas, caso ocorram
     handle_alert()
 
@@ -323,92 +322,74 @@ def login(usuario, senha):
         except Exception as e:
             erro_msg = f"Erro ao processar o ID {id_selector}: {str(e)}"
             erros.append(erro_msg)
-            navegador.get(url_inicial)  
+            navegador.get(url_inicial) 
+            
+
             #endregion
 #region Retorna à página inicial em caso de erro
             continue
 
 
-    x=0
-    resultado2=[]
-            
-    for html in html_notas:
-        soup = BeautifulSoup(html, 'html.parser')
-        
-        
-        #endregion
-#region Remove todas as ocorrências de "Alunos Matriculados"
-        for element in soup.find_all(string=lambda text: "Alunos Matriculados" in text):
-            element.replace_with(element.replace("Alunos Matriculados", ""))  
-            #endregion
-#region Remove o texto
+    resultado2 = []
+    erros = []
+    log_dir = r"app\logs"
+    log_file = os.path.join(log_dir, "log.txt")
 
+    try:
+        for idx, html in enumerate(html_notas):
+            soup = BeautifulSoup(html, 'html.parser')
+
+            # Remove o último <th> na linha com id "trAval"
+            tr = soup.find('tr', id='trAval')
+            if tr:
+                th_elements = tr.find_all('th')
+                if th_elements:
+                    th_elements[-1].decompose()
+
+            # Remove a última célula de cada linha de todas as tabelas
+            for table in soup.find_all('table'):
+                for row in table.find_all('tr'):
+                    cells = row.find_all(['th', 'td'])
+                    if cells:
+                        cells[-1].decompose()
+
+            # Remove todas as ocorrências de "Alunos Matriculados"
+            for element in soup.find_all(string=lambda text: "Alunos Matriculados" in text):
+                element.replace_with(element.replace("Alunos Matriculados", ""))
+
+            # Adiciona a div com a classe 'notas' ao resultado
+            notas_div = soup.find('div', class_='notas')
+            if notas_div:
+                div_str = str(notas_div)
+                resultado2.append(f"<strong>{nomes_turmas[idx]}</strong>{div_str}<br><br><br><br>")
         
-        #endregion
-#region Encontra a div com a classe 'notas'
-        notas_div = soup.find('div', class_='notas')
-        if notas_div:
-            resultados.append(notas_div)  
-            #endregion
-#region Adiciona a div ao resultado
-            resultados = [str(item) for item in resultados]  
-            #endregion
-#region Converte todos os itens para string
+        # Converte o resultado final para string
+        resultado = " ".join(resultado2)
+        soup = BeautifulSoup(resultado, 'html.parser')
 
-            
-            #endregion
-#region Combina os resultados com os nomes das turmas
-            resultado2.append("<strong>" + nomes_turmas[x] + "</strong>" + resultados[x] + "<br><br>")
-            resultado = " ".join(resultado2)
-            
-            print(nomes_turmas[x])  
-            #endregion
-#region Imprime o nome da turma
-            x += 1  
-            #endregion
-#region Diretório específicoa
-    log_dir = r"C:\Users\lucas\OneDrive\SigaaV2\log.txt"
-    os.makedirs(log_dir, exist_ok=True)  
-    #endregion
-#region Cria o diretório se não existir
+        # Itera pelas tabelas para remover colunas específicas
+        for table in soup.find_all('table'):
+            headers = table.find('tr').find_all('th')
+            indices_to_remove = [index for index, header in enumerate(headers) if header.text.strip().lower() in ['matrícula', 'nome']]
 
-    log_file = os.path.join(log_dir, r"C:\Users\lucas\OneDrive\SigaaV2\log.txt")
+            for row in table.find_all('tr'):
+                cells = row.find_all(['th', 'td'])
+                for index in sorted(indices_to_remove, reverse=True):
+                    if index < len(cells):
+                        cells[index].decompose()
+
+        # Resultado final
+        resultado_final = str(soup)
+
+    except Exception as e:
+        erros.append(f"Erro ao processar HTML: {e}")
+
+    # Cria o diretório de logs, se necessário, e salva os erros
+    os.makedirs(log_dir, exist_ok=True)
     with open(log_file, "w", encoding="utf-8") as arquivo:
         arquivo.write("\n".join(erros))
-    print("Logs armazenados")
+    if erros:
+        print("Erros armazenados:", erros)
 
-    
-    #endregion
-#region Exibir os nomes coletados
     print("Nomes das turmas coletados:", nomes_turmas)
-    navegador.close
-    soup = BeautifulSoup(resultado, 'html.parser')
-
-    
-    #endregion
-#region Iterar por todas as tabelas
-    for table in soup.find_all('table'):
-        
-        #endregion
-#region Encontrar os índices das colunas "Matrícula" e "Nome" no cabeçalho
-        headers = table.find('tr').find_all('th')
-        indices_to_remove = []
-        
-        for index, header in enumerate(headers):
-            if header.text.strip().lower() in ['matrícula', 'nome']:
-                indices_to_remove.append(index)
-
-        
-        #endregion
-#region Remover as colunas correspondentes nas linhas da tabela   
-        for row in table.find_all('tr'):
-            cells = row.find_all(['th', 'td'])
-            for index in sorted(indices_to_remove, reverse=True):
-                if index < len(cells):
-                    cells[index].decompose()
-
-    
-    #endregion
-#region Resultado atualizado
-    resultado2 = str(soup)
-    return resultado2
+    return resultado_final

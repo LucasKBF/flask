@@ -44,7 +44,7 @@ header nav a {
     text-align: center;
     font-size: 2rem;
     margin-top: 2rem;
-    color: #4ac94a;
+    color: #9643f5;
 }
 
 .notas {
@@ -64,7 +64,7 @@ header nav a {
 }
 
 .tabelaRelatorio th {
-    background-color: #4CAF50;
+    background-color: #9643f5;
     color: white;
     padding: 10px;
     text-align: center;
@@ -85,9 +85,7 @@ header nav a {
     background-color: #e8f5e9;
 }
 
-.tabelaRelatorio tbody tr:hover {
-    background-color: #cbcecc;
-}
+
 
 strong {
     display: block;
@@ -100,10 +98,10 @@ strong {
 
 a {
     text-decoration: none;
-    color: #4CAF50;
+    color: #000000;
     transition: color 0.3s ease;
 }
 
 a:hover {
-    color: #81C784;
+    color: #9643f5;
 }

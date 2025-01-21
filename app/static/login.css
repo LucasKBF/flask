@@ -17,14 +17,6 @@ header {
 }
 
 /* Footer */
-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 40px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
 
 
 footer {
@@ -224,4 +216,7 @@ a:hover {
 
 .tgl:checked + .tgl-btn:after {
   opacity: 1;
+}
+.inicio {
+  font-size: 50px;
 }
