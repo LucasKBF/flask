@@ -253,6 +253,7 @@ def login(usuario, senha):
 #region Tratar alertas, caso ocorram
     handle_alert()
 
+
     erros = []
     resultados = []
     nomes_turmas = []
