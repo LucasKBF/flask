@@ -1,0 +1,109 @@
+/* styles.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+header h1 a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.5rem;
+}
+
+header nav a {
+    margin-left: 15px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+
+.hero {
+    text-align: center;
+    color: white;
+    padding: 3rem 1rem;
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+
+.title {
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 2rem;
+    color: #4ac94a;
+}
+
+.notas {
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    overflow-x: auto;
+}
+
+.tabelaRelatorio {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.tabelaRelatorio th {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.tabelaRelatorio td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.tabelaRelatorio tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+.tabelaRelatorio tbody tr:nth-child(even) {
+    background-color: #e8f5e9;
+}
+
+.tabelaRelatorio tbody tr:hover {
+    background-color: #cbcecc;
+}
+
+strong {
+    display: block;
+	text-align: center;
+    font-size: 1.25rem;
+    margin: 1.5rem 0 0.5rem;
+    color: #312d2dd3;
+	margin-bottom: -3%;
+}
+
+a {
+    text-decoration: none;
+    color: #4CAF50;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #81C784;
+}

@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SigaaV2 - [Login]</title>
-  <link rel="stylesheet" href="\static\login.css"> 
+  <title>SigaaV2 - Login</title>
+  <link rel="stylesheet" href=".\static\login.css"> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
@@ -15,15 +17,20 @@
   
   <main class="login">
     <form action="/dashboard" method="post">
-        Usuario:<br> <input type="text" name="usuario" id="usuario" required><br><br>
+        Usuario:<br> <input type="text" name="usuario" placeholder="Digite seu usuario" class="inaer" id="usuario" required><br><br>
         Senha: <br> <div class="form-group">
             <input type="password" id="senha" placeholder="Digite sua senha" name="senha" required>
-        <br><br>
-        <div class="checkbox">
+        <br>
+        <div class="form-group">
+          <input class="tgl tgl-skewed" id="notasfaltas" type="checkbox">
+          <label class="tgl-btn" data-tg-off="Faltas" data-tg-on="Notas" for="notasfaltas"></label>
+        </div>
+        <div class="checkboax">
             <input type="checkbox" id="mostrarSenha" onclick="toggleSenha()">
-            <label for="mostrarSenha">Mostrar senha</label>
+            <label style="margin-bottom: -0.1px;" for="mostrarSenha">Mostrar senha</label>
         </div>
         <br>
+        
         <button onclick="validarFormulario()" type="submit">Entrar</button>   
     </form>
     <div id="loading" class="hidden">
@@ -33,9 +40,22 @@
    <!-- {{ erro|safe }} -->
   </main>
 </body>
+<footer>
+  <div>
+    <h3>Contato</h3>
+    <p>sigaav2@gmail.com</p>
+<!--<p>+55 (48) 9201-3419</p>-->
+    
+  </div>
+  <div>
+    <p>          </p>
+  </div>
+</footer>
 </html>
 
 <script>
+
+
     function toggleSenha() {
       const senha = document.getElementById("senha");
       // Alterna entre os tipos "password" e "text"
@@ -60,6 +80,7 @@
             // Obtém os valores dos campos
             const usuario = document.getElementById("usuario").value.trim();
             const senha = document.getElementById("senha").value.trim();
+            const notasfaltas = document.getElementById("notasfaltas").value.trim();
 
             // Validação simples
             if (usuario === "") {
@@ -68,7 +89,12 @@
             if (senha === "") {
                 return;
             }
+
+
+
           loading()
     }
+    
+
   </script>
   

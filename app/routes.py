@@ -11,7 +11,7 @@ def verifica_manutencao():
     
     #endregion
 #region Ignorar requisições para arquivos estáticos
-    if em_manutencao == "True" and not (request.endpoint == 'manutencao' or request.endpoint.startswith('static')):
+    if em_manutencao == "True" and not (request.endpoint == 'manutencao' or request.endpoint.startswith('templates/static')):
         return redirect(url_for('manutencao'))
 
 @app.route('/manutencao')
@@ -23,7 +23,7 @@ def manutencao():
 
 @app.route('/favicon.ico')
 def favicon():
-    return send_from_directory('static', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+    return send_from_directory('templates/static', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route("/")
 @app.route("@")
@@ -38,6 +38,7 @@ def login():
 def autenticar():
     usuario= request.form.get("usuario")
     senha= request.form.get("senha")
+    notasfaltas = request.form.get("notasfaltas")
     notas1 = login (usuario, senha)
     notas2 = Markup(notas1)
     erro1="<br><br><strong style='color:red; font-size: medium;'>Erro ao logar:<br>Verifique se o usuario e senha estão corretos e se o Sigaa está online.</strong>"
@@ -370,7 +371,7 @@ def login(usuario, senha):
     #endregion
 #region Cria o diretório se não existir
 
-    log_file = os.path.join(log_dir, "erros_log.txt")
+    log_file = os.path.join(log_dir, "C:\Users\lucas\OneDrive\SigaaV2\log.txt")
     with open(log_file, "w", encoding="utf-8") as arquivo:
         arquivo.write("\n".join(erros))
     print("Logs armazenados")

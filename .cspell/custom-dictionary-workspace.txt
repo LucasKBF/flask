@@ -1,11 +1,17 @@
 # Custom Dictionary Words
 atualizacoes
 botao
+botaocima
 creditos
 específicoa
+Formulario
 horario
 manutencao
+notasfaltas
+proprio
+Relatorio
 Sigaa
 sigab
 usuario
 Virtualj
+windll
