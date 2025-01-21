@@ -17,7 +17,7 @@ def verifica_manutencao():
 @app.route('/manutencao')
 def manutencao():
     if em_manutencao=="False":
-        return redirect(url_for('@'))
+        return redirect(url_for('/'))
     else:
         return render_template('manutenção.html')
 
@@ -26,7 +26,7 @@ def favicon():
     return send_from_directory('templates/static', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route("/")
-@app.route("@")
+@app.route("/index")
 def index():
     return render_template("index.html")
 
@@ -83,7 +83,7 @@ def contato():
         to_email = "sigaav2@gmail.com"  
         #endregion
 #region Substitua pelo e-mail do destinatário
-        subject = "Oi"
+        subject = "Contato"
         body = f"Nome: {nome} \nEmail: {email} \nMensagem: {mensagem}"
         
         msg = MIMEMultipart()
@@ -372,7 +372,7 @@ def login(usuario, senha):
     #endregion
 #region Cria o diretório se não existir
 
-    log_file = os.path.join(log_dir, "C:\Users\lucas\OneDrive\SigaaV2\log.txt")
+    log_file = os.path.join(log_dir, r"C:\Users\lucas\OneDrive\SigaaV2\log.txt")
     with open(log_file, "w", encoding="utf-8") as arquivo:
         arquivo.write("\n".join(erros))
     print("Logs armazenados")
