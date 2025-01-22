@@ -136,11 +136,19 @@ a:hover {
   transform: scale(1.2);
 }
 
-a {
+.likasrd{
+  color:#4e0505b9;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.alink {
   display: inline-block;
   text-decoration: none;
-  background-color: #4b00e000;
-  color: #ffffff00;
+  background-color: #00000000;
+  color: #000000;
   padding: 10px 20px;
   font-size: 18px;
   font-weight: bold;

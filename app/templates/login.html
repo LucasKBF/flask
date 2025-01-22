@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SigaaV2 - Login</title>
   <link rel="stylesheet" href=".\static\login.css"> 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
   <header>
-    <a class="inicio" href="/">SigaaV2</a>
+    <a class="alink" class="inicio" href="/">SigaaV2</a>
   </header>
   
   <main class="login">
@@ -22,80 +22,63 @@
             <input type="password" id="senha" placeholder="Digite sua senha" name="senha" required>
         <br>
         <div class="form-group">
-          <input class="tgl tgl-skewed" id="notasfaltas" type="checkbox">
-          <label class="tgl-btn" data-tg-off="Faltas" data-tg-on="Notas" for="notasfaltas"></label>
+          <!--<input class="tgl tgl-skewed" id="notasfaltas" type="checkbox">
+          <label class="tgl-btn" data-tg-off="Faltas" data-tg-on="Notas" for="notasfaltas"></label>-->
         </div>
         <div class="checkboax">
             <input type="checkbox" id="mostrarSenha" onclick="toggleSenha()">
             <label style="margin-bottom: -0.1px;" for="mostrarSenha">Mostrar senha</label>
         </div>
         <br>
-        
+        <!-- Adicionando o widget reCAPTCHA -->
+        <div class="g-recaptcha" data-sitekey="6LfZmb8qAAAAANWSlBj1HyGbNM8GjAempwmB1WRC"></div>
+        <br>
         <button onclick="validarFormulario()" type="submit">Entrar</button>   
     </form>
     <div id="loading" class="hidden">
       <div class="spinner"></div>
       <p class="details" id="loadingDetails">Preparando...</p>   
   </div>
-   {{ erro|safe }}
   </main>
+  {{ erro|safe }}
 </body>
 <footer>
-  
   <div>
     <h3>Contato</h3>
     <p>sigaav2@gmail.com</p>
-<!--<p>+55 (48) 9201-3419</p>-->
-    
   </div>
   <div>
     <p>          </p>
   </div>
 </footer>
-</html>
 
 <script>
-
-
-    function toggleSenha() {
-      const senha = document.getElementById("senha");
-      // Alterna entre os tipos "password" e "text"
-      if (senha.type === "password") {
-        senha.type = "text";
-      } else {
-        senha.type = "password";
-      }
+  function toggleSenha() {
+    const senha = document.getElementById("senha");
+    if (senha.type === "password") {
+      senha.type = "text";
+    } else {
+      senha.type = "password";
     }
-    function loading(){
-      const loadingDiv = document.getElementById("loading");
-      loadingDiv.classList.remove("hidden"); 
-      const details = document.getElementById("loadingDetails");
-            details.textContent = "Conectando ao Sigaa...";
+  }
 
-            setTimeout(() => {
-                details.textContent = "Buscando Notas";
-            }, 127500);
+  function loading() {
+    const loadingDiv = document.getElementById("loading");
+    loadingDiv.classList.remove("hidden");
+    const details = document.getElementById("loadingDetails");
+    details.textContent = "Conectando ao Sigaa...";
+
+    setTimeout(() => {
+      details.textContent = "Buscando Notas";
+    }, 127500);
+  }
+
+  function validarFormulario() {
+    const usuario = document.getElementById("usuario").value.trim();
+    const senha = document.getElementById("senha").value.trim();
+    if (usuario === "" || senha === "") {
+      return;
     }
-
-    function validarFormulario() {
-            // Obtém os valores dos campos
-            const usuario = document.getElementById("usuario").value.trim();
-            const senha = document.getElementById("senha").value.trim();
-            const notasfaltas = document.getElementById("notasfaltas").value.trim();
-
-            // Validação simples
-            if (usuario === "") {
-                return;
-            }
-            if (senha === "") {
-                return;
-            }
-
-
-
-          loading()
-    }
-    
-
-  </script>
-  
+    loading();
+  }
+</script>
