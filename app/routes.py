@@ -1,7 +1,7 @@
 from app.config import *
 
-#with open(r"C:\Users\lucas\OneDrive\Área de Trabalho\SigaaV2\app\manu.txt", "r") as arquivo:
-with open(r"C:\Users\Victor\codes\GitHub\SigaaV2\app\manu.txt", "r") as arquivo:
+with open(r"C:\Users\lucas\OneDrive\Área de Trabalho\SigaaV2\app\manu.txt", "r") as arquivo:
+#with open(r"C:\Users\Victor\codes\GitHub\SigaaV2\app\manu.txt", "r") as arquivo:
     manu = arquivo.read()
     em_manutencao = manu
 
@@ -62,6 +62,13 @@ def creditos():
 def segurança():
     return render_template("segurança.html")
 
+@app.route("/termosdeservico")
+def termosdeservico():
+    return render_template("termosdeservico.html")
+
+@app.route("/politicadeprivacidade")
+def politicadeprivacidade():
+    return render_template("politicadeprivacidade.html")
 
 @app.route('/contato', methods=['GET', 'POST'])
 def contato():
