@@ -372,11 +372,11 @@ def login(usuario, senha):
             erro_msg = f"Erro ao processar o ID {id_selector}: {str(e)}"
             erros.append(erro_msg)
             navegador.get(url_inicial) 
-            
+            continue
 
             #endregion
-#region Retorna à página inicial em caso de erro
-            continue
+
+        
 
 
     resultado2 = []
