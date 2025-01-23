@@ -40,15 +40,16 @@ def autenticar():
     usuario= request.form.get("usuario")
     senha= request.form.get("senha")
     notasfaltas = request.form.get("notasfaltas")
-    notas1 = login (usuario, senha)
+    notas1, atividades = login (usuario, senha)
     notas2 = Markup(notas1)
+    atividades2 = Markup(atividades)
     erro1="<br><br><strong style='color:red; font-size: medium;'>Erro ao logar:<br>Verifique se o usuario e senha estão corretos e se o Sigaa está online.</strong>"
     erro = Markup(erro1)
     if notas2=="erro":
 
         return render_template("login.html", erro=erro)
     else:
-        return render_template("dashboard.html", notas=notas2)
+        return render_template("dashboard.html", notas=notas2, atv=atividades2)
 
 @app.route("/sobre")
 def sobre():
@@ -207,15 +208,6 @@ def login(usuario, senha):
         except:
             pass  
         #endregion
-#region Caso não haja alerta, continua sem problemas
-
-    
-    #endregion
-#region Configurações do WebDriver (rodar sem abrir janela do navegador)
-
-
-    
-    #endregion
 #region Inicializar o WebDriver
 
     
@@ -250,6 +242,7 @@ def login(usuario, senha):
 
 #endregion
 #region Ver se a senha ta errada
+
     elements = navegador.find_elements(By.XPATH, "//center[@style='color: #922; font-weight: bold;' and text()='Usuário e/ou senha inválidos']")
     
     if elements:
@@ -264,9 +257,52 @@ def login(usuario, senha):
 
 #region Tratar alertas, caso ocorram
     handle_alert()
-
-
+    rows = navegador.find_elements(By.XPATH, "//table/tbody/tr")
+    atividades=[]
     erros = []
+    for row in rows:
+        try:
+            # Capturando os elementos necessários
+            data_element = row.find_element(By.CSS_SELECTOR, "td font[color='gray']")
+            atividade_element = row.find_element(By.CSS_SELECTOR, "td small font[color='gray']")
+            
+            # Extraindo informações
+            data_envio = data_element.text.strip()
+            atividade_info = atividade_element.get_attribute("innerText").split("\n")
+            materia = atividade_info[0].strip()
+            
+            # Filtrando a parte do nome da atividade
+            if "Tarefa:" in atividade_info[1]:
+                nome_atividade = atividade_info[1].split("Tarefa:")[-1].strip()
+            elif "Avaliação:" in atividade_info[1]:
+                nome_atividade = atividade_info[1].split("Avaliação:")[-1].strip()
+            elif "Questionário:" in atividade_info[1]:
+                nome_atividade = atividade_info[1].split("Questionário:")[-1].strip()
+            else:
+                nome_atividade = "Atividade não especificada"
+
+            # Separando data e horário (ajuste conforme necessário)
+            if " " in data_envio:  # Verifica se existe um espaço, o que indica que temos data e horário juntos
+                data_envio, horario_envio = data_envio.split(" ", 1)  # Divide a string em data e horário
+            else:
+                horario_envio = ""  # Caso não tenha horário, deixa em branco
+
+            # Armazenando a atividade no banco de dados
+            atividade = {
+                'data_envio': data_envio,
+                'horario_envio': horario_envio,  # Agora com horário separado
+                'materia': materia,
+                'nome_atividade': nome_atividade
+            }
+            atividades.append(atividade)
+        except Exception as e:
+            print(f"Erro ao processar atividade: {e}")
+            erros.append(e)
+            continue
+    if atividades:
+        atv = atividades
+    else:
+        atv = '<p style="text-align: center;"> Nenhuma atividade encontrada.</p>'
     resultados = []
     nomes_turmas = []
     html_notas = []
@@ -405,4 +441,4 @@ def login(usuario, senha):
         print("Erros armazenados:", erros)
 
     print("Nomes das turmas coletados:", nomes_turmas)
-    return resultado_final
+    return resultado_final, atv
