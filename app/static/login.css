@@ -3,17 +3,58 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   color: #333;
-  background-color: rgb(59, 59, 59);
+  background-color: rgb(255, 255, 255);
 }
 
 /* Header */
 header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 20px 40px;
-  color: rgb(0, 0, 0);
-  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+header nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+header nav a.botao {
+  background-color: #000;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+header nav a:last-child {
+  background-color: #000;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+.alink {
+  display: inline-block;
+  text-decoration: none;
+  background-color: #00000000;
+  color: #000000;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Footer */
@@ -91,6 +132,7 @@ input[type="password"], input[type="text"] {
   text-align: center;
   box-sizing: border-box;
   border-radius: 15px;
+  background-color: rgb(233, 233, 233);
 }
 
 .checkboax {
