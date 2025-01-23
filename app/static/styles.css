@@ -175,6 +175,9 @@ font-size: 14px;
 .title {
   font-size: 30px;
 }
+.info {
+  text-align: center;
+}
 /* Media Queries */
 @media (max-width: 768px) {
   header, footer {

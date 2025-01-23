@@ -1,7 +1,7 @@
 from app.config import *
 
-#with open(r"C:\Users\lucas\OneDrive\Área de Trabalho\SigaaV2\app\manu.txt", "r") as arquivo:
-with open(r"C:\Users\Victor\codes\GitHub\SigaaV2\app\manu.txt", "r") as arquivo:
+with open(r"C:\Users\lucas\OneDrive\Área de Trabalho\SigaaV2\app\manu.txt", "r") as arquivo:
+#with open(r"C:\Users\Victor\codes\GitHub\SigaaV2\app\manu.txt", "r") as arquivo:
     manu = arquivo.read()
     em_manutencao = manu
 
@@ -40,16 +40,17 @@ def autenticar():
     usuario= request.form.get("usuario")
     senha= request.form.get("senha")
     notasfaltas = request.form.get("notasfaltas")
-    notas1, atividades = login (usuario, senha)
+    notas1, atividades, resultado_info = login (usuario, senha)
     notas2 = Markup(notas1)
     atividades2 = Markup(atividades)
+    resultado_info2 = Markup(resultado_info)
     erro1="<br><br><strong style='color:red; font-size: medium;'>Erro ao logar:<br>Verifique se o usuario e senha estão corretos e se o Sigaa está online.</strong>"
     erro = Markup(erro1)
     if notas2=="erro":
 
         return render_template("login.html", erro=erro)
     else:
-        return render_template("dashboard.html", notas=notas2, atv=atividades2)
+        return render_template("dashboard.html", notas=notas2, atv=atividades2, info=resultado_info2)
 
 @app.route("/sobre")
 def sobre():
@@ -242,7 +243,7 @@ def login(usuario, senha):
 
 #endregion
 #region Ver se a senha ta errada
-
+    
     elements = navegador.find_elements(By.XPATH, "//center[@style='color: #922; font-weight: bold;' and text()='Usuário e/ou senha inválidos']")
     
     if elements:
@@ -254,6 +255,23 @@ def login(usuario, senha):
 
     
     #endregion
+    WebDriverWait(navegador, 5).until(EC.presence_of_element_located((By.XPATH, "//table[.//acronym[@title='Média de Conclusão']]")))
+    tabela_desejada = navegador.find_element(By.XPATH, "//table[.//acronym[@title='Média de Conclusão']]")
+
+    # Capturar as linhas e colunas
+    linhas = tabela_desejada.find_elements(By.TAG_NAME, "tr")
+    info = []
+
+    # Iterar pelas linhas da tabela
+    for linha in linhas:
+        colunas = linha.find_elements(By.TAG_NAME, "td")
+        dados = [coluna.text.strip() for coluna in colunas if coluna.text.strip()]  # Ignorar colunas vazias
+        if dados:  # Apenas adicionar se houver dados na linha
+            info.append(dados)
+
+    # Formatando a saída final com quebra de linhas
+    resultado_info = "<br>".join(["".join(linha) for linha in info])  # Adiciona separadores e novas linhas
+
 
 #region Tratar alertas, caso ocorram
     handle_alert()
@@ -296,7 +314,6 @@ def login(usuario, senha):
             }
             atividades.append(atividade)
         except Exception as e:
-            print(f"Erro ao processar atividade: {e}")
             erros.append(e)
             continue
     if atividades:
@@ -441,4 +458,4 @@ def login(usuario, senha):
         print("Erros armazenados:", erros)
 
     print("Nomes das turmas coletados:", nomes_turmas)
-    return resultado_final, atv
+    return resultado_final, atv, resultado_info
