@@ -1,7 +1,7 @@
 from app.config import *
 
-#with open(r"C:\Users\lucas\OneDrive\Área de Trabalho\SigaaV2\app\manu.txt", "r") as arquivo:
-with open(r"C:\Users\Victor\codes\GitHub\SigaaV2\app\manu.txt", "r") as arquivo:
+with open(r"C:\Users\lucas\OneDrive\Área de Trabalho\SigaaV2\app\manu.txt", "r") as arquivo:
+#with open(r"C:\Users\Victor\codes\GitHub\SigaaV2\app\manu.txt", "r") as arquivo:
     manu = arquivo.read()
     em_manutencao = manu
 
@@ -70,11 +70,16 @@ def termosdeservico():
 def politicadeprivacidade():
     return render_template("politicadeprivacidade.html")
 
+@app.route('/LICENSE')
+def license():
+    return render_template("LICENSE.html")
+
 @app.route('/contato', methods=['GET', 'POST'])
 def contato():
     status = ""
     if request.method == 'POST':
-        
+
+
         #endregion
 #region Captura os dados do formulário
         nome = request.form.get('nome')
