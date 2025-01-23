@@ -10,21 +10,234 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+  
+  <style>
+
+    .botaodetermo{
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  /* Estilização do popup */
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      text-align: center;
+      z-index: 1000;
+    }
+
+    .popup h1 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .popup p {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .popup button {
+      padding: 10px 15px;
+      font-size: 14px;
+      color: #fff;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .popup button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Fundo escuro */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+
+    /* Esconder popup */
+    .hidden {
+      display: none;
+    }
+  </style>
+  <!-- Fundo escuro -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Popup dos termos -->
+  <div class="popup" id="popup">
+    <h1>Termos de Serviço</h1>
+    <p>
+      Ao continuar utilizando este site, você concorda com os nossos <a href="/termosdeservico">Termos de Serviço</a>. 
+      Por favor, leia com atenção.
+    </p>
+    <button class="botaodetermo" id="agreeButton">Concordo</button>
+  </div>
+
+  <script>
+    // Verifica se o cookie já foi definido
+    if (document.cookie.includes("termsAccepted=true")) {
+      document.getElementById("popup").classList.add("hidden");
+      document.getElementById("overlay").classList.add("hidden");
+    }
+
+    // Quando o botão "Concordo" é clicado
+    document.getElementById("agreeButton").addEventListener("click", function () {
+      // Define um cookie válido por 30 dias
+      const expirationDate = new Date();
+      expirationDate.setDate(expirationDate.getDate() + 30);
+      document.cookie = `termsAccepted=true; expires=${expirationDate.toUTCString()}; path=/`;
+
+      // Esconde o popup e o fundo escuro
+      document.getElementById("popup").classList.add("hidden");
+      document.getElementById("overlay").classList.add("hidden");
+    });
+  </script>
     <header>
-        <h1 ><a class="alink" class="inicio" href="/">SigaaV2</a></h1>
-        <nav>
-            <a class="alink" href="/contato">Contato</a>
-            <a class="alink" href="/atualizacoes">Atualizações</a>
-            <a class="alink" href="/sobre">Sobre</a>
-            <a class="alink" href="/segurança">Segurança</a>
-            <a class="alink" href="/creditos">Creditos</a>
-            <a class="alink" href="/autenticar">Entrar</a>
-        </nav>
+      <h1 ><a class="alink" class="inicio" href="/"; style="font-size: 30px;">SigaaV2</a></h1>
+          <nav>
+              <a class="alink" href="/contato"; style="color: black;">Contato</a>
+              <a class="alink" href="/atualizacoes"; style="color: black;">Atualizações</a>
+              <a class="alink" href="/sobre"; style="color: black;">Sobre</a>
+              <a class="alink" href="/segurança"; style="color: black;">Segurança</a>
+              <a class="alink" href="/creditos"; style="color: black;">Creditos</a>
+              <a class="alink" href="/termosdeservico"; style="color: black;">Termos de Serviço</a>
+              <a class="alink" href="/politicadeprivacidade"; style="color: black;">Politica de Privacidade</a>
+              <a class="alink" href="/autenticar"; style="color: white;">Entrar</a>
+          </nav>
       </header>
       <div class="hero">
         <h2>SigaaV2</h2>
         <p>Veja aqui as informações sobre sua conta no Sigaa.</p>
+        <br>
+        <p style="font-size: 18px; -webkit-text-fill-color: rgb(248, 206, 117);">Devido a um erro do proprio SIGAA</p>
+        <p style="font-size: 18px; -webkit-text-fill-color: rgb(248, 206, 117);">As faltas estarão Inconsistentes</p>
       </div>
+      <h1 class="title">Atividades e Tarefas</h1>
+      <div class="info">
+      <table>
+					<tbody><tr>
+						<td> Matrícula: </td>
+						<td> 202321000423</td>
+					</tr>
+					<tr>
+						<td valign="top"> Curso: </td>
+						<td> TÉCNICO EM ELETRÔNICA INTEGRADO AO ENSINO MÉDIO [604]/FLN - Técnico - Integrado - Florianópolis -
+						T</td>
+					</tr>
+					<tr>
+						<td> Nível: </td>
+						<td> TÉCNICO</td>
+					</tr>
+					<tr>
+						<td> Status: </td>
+						<td> CURSANDO</td>
+					</tr>
+					<tr>
+						<td> E-Mail: </td>
+						<td>
+							lucas.k.b.fabris@gm...</td>
+					</tr>
+					<tr>
+						<td> Entrada: </td>
+						<td> 2023.2</td>
+					</tr>
+					<tr>
+							<td colspan="2">&nbsp;</td>
+						</tr>
+						<tr>
+							<td colspan="2" style="text-align: center; font-style: italic">Índices Acadêmicos</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<table width="100%">
+									<tbody><tr>
+										</tr>
+												<tr>
+											<td><acronym title="Média de Conclusão">MC:</acronym></td>
+											<td align="right"><div style="margin-right:15px;">9.3125</div></td>
+										<td><acronym title="Índice de Rendimento Acadêmico">IRA:</acronym></td>
+											<td align="right"><div style="margin-right:15px;">9.5</div></td>
+										</tr>
+												<tr>
+											<td><acronym title="Índice de Eficiência em Carga Horária">IECH:</acronym></td>
+											<td align="right"><div style="margin-right:15px;">1.0</div></td>
+										<td><acronym title="Índice de Eficiência em Períodos Letivos">IEPL:</acronym></td>
+											<td align="right"><div style="margin-right:15px;">0.8824</div></td>
+										</tr>
+												<tr>
+											<td><acronym title="Índice de Eficiência Acadêmica">IEA:</acronym></td>
+											<td align="right"><div style="margin-right:15px;">8.2173</div></td>
+										<td><acronym title="Coeficiente de Aproveitamento Acadêmico">CAA:</acronym></td>
+											<td align="right"><div style="margin-right:15px;">0.95</div></td>
+										</tr>
+									<tr>	
+										<td colspan="4" align="center">
+<form id="j_id_jsp_1383391995_182" name="j_id_jsp_1383391995_182" method="post" action="/sigaa/portais/discente/discente.jsf" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_id_jsp_1383391995_182" value="j_id_jsp_1383391995_182">
+<a id="j_id_jsp_1383391995_182:detalharIndiceAcademico" href="#" style="font-size:9px; margin-right:12px;" onclick="if(typeof jsfcljs == 'function'){jsfcljs(document.getElementById('j_id_jsp_1383391995_182'),{'j_id_jsp_1383391995_182:detalharIndiceAcademico':'j_id_jsp_1383391995_182:detalharIndiceAcademico'},'');}return false">Detalhar</a><input type="hidden" name="javax.faces.ViewState" id="javax.faces.ViewState" value="j_id1">
+</form></td>
+									</tr>
+								</tbody></table>
+							</td>
+						</tr>
+						
+					<tr>
+						<td colspan="2">
+							<br>
+								<i><center>
+								Integralizações:</center></i>
+								<br>
+								<table>
+									<tbody><tr>
+										<td> CH. Obrigatória Pendente </td>
+										<td align="right"> 3120</td>
+									</tr>
+									<tr>
+										<td> CH. Optativa Pendente </td>
+										<td align="right"> 0</td>
+									</tr>
+									<tr>
+										<td> CH. Total Currículo </td>
+										<td align="right"> 4080</td>
+									</tr>
+									<tr>
+										<td colspan="2" style="border-width: 1px; border-color: black; border-style: thin; background: white;">
+											<div style="border: thin; border-color: black; width: 23.529411764705888%; background: silver; text-align: center;">
+												&nbsp;
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2" align="center">
+													24% Integralizado
+										</td>
+									</tr>
+
+								</tbody></table>
+
+							</td>
+					</tr>
+				</tbody></table>
+      </div>
+      <h1 class="title">Atividades e Tarefas</h1>
+      <p style="text-align: center;"> Nenhuma atividade encontrada.</p>
       <h1 class="title">Notas</h1>
       <strong>BIOLOGIA</strong><div class="notas" style="clear: both;">
 <table class="tabelaRelatorio" width="100%">
@@ -41,7 +254,6 @@
 <th class="nota" width="5%">Resultado Final</th>
 <!-- Fim Custom Esig #73921 -->
 <th style="text-align: right;" width="5%">Faltas</th>
-
 </tr>
 <tr bgcolor="#C4D2EB" id="trAval">
 <th class="nota" id="unid">Nota</th>
@@ -57,7 +269,7 @@
 <input id="notaAval_65244268" type="hidden" value=""/>
 <input id="pesoAval_65244268" type="hidden" value="1"/>
 <th class="nota" id="unid">Nota</th>
-<th></th><th></th><th></th><th></th>
+<th></th><th></th><th></th>
 </tr>
 </thead>
 <tbody>
@@ -77,16 +289,15 @@
 <td class="nota" style="border-right: 1px solid #888;">
 </td>
 <!-- In&#237;cio Custom Esig #73921 -->
-
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
 <!-- Fim Custom Esig #73921 -->
 <td style="border-right: 1px solid #888; text-align:right;">
 				0</td>
-<td style="text-align: left;">
-						MATRICULADO</td>
 </tr>
 </tbody>
 </table>
-</div><br/><br/> <strong>ELETRICIDADE I</strong><div class="notas" style="clear: both;">
+</div><br/><br/><br/><br/> <strong>ELETRICIDADE I</strong><div class="notas" style="clear: both;">
 <table class="tabelaRelatorio" width="100%">
 <caption></caption>
 <thead>
@@ -101,7 +312,6 @@
 <th class="nota" width="5%">Resultado Final</th>
 <!-- Fim Custom Esig #73921 -->
 <th style="text-align: right;" width="5%">Faltas</th>
-
 </tr>
 </thead>
 <tbody>
@@ -122,11 +332,10 @@
 <!-- Fim Custom Esig #73921 -->
 <td style="border-right: 1px solid #888; text-align:right;">
 				0</td>
-
 </tr>
 </tbody>
 </table>
-</div><br/><br/> <strong>FILOSOFIA E SOCIOLOGIA</strong><div class="notas" style="clear: both;">
+</div><br/><br/><br/><br/> <strong>FILOSOFIA E SOCIOLOGIA</strong><div class="notas" style="clear: both;">
 <table class="tabelaRelatorio" width="100%">
 <caption></caption>
 <thead>
@@ -139,7 +348,6 @@
 <th class="nota" width="5%">Resultado Final</th>
 <!-- Fim Custom Esig #73921 -->
 <th style="text-align: right;" width="5%">Faltas</th>
-
 </tr>
 </thead>
 <tbody>
@@ -156,11 +364,10 @@
 <!-- Fim Custom Esig #73921 -->
 <td style="border-right: 1px solid #888; text-align:right;">
 				0</td>
-
 </tr>
 </tbody>
 </table>
-</div><br/><br/> <strong>FÍSICA</strong><div class="notas" style="clear: both;">
+</div><br/><br/><br/><br/> <strong>FÍSICA</strong><div class="notas" style="clear: both;">
 <table class="tabelaRelatorio" width="100%">
 <caption></caption>
 <thead>
@@ -174,7 +381,6 @@
 <th class="nota" width="5%">Resultado Final</th>
 <!-- Fim Custom Esig #73921 -->
 <th style="text-align: right;" width="5%">Faltas</th>
-
 </tr>
 <tr bgcolor="#C4D2EB" id="trAval">
 <th class="nota" id="aval_65757030">LAB</th>
@@ -198,13 +404,13 @@
 <input id="denAval_65757122" type="hidden" value="prova 02"/>
 <input id="notaAval_65757122" type="hidden" value=""/>
 <input id="pesoAval_65757122" type="hidden" value="1"/>
-
+<th class="nota" id="aval_65757145">PR03</th>
 <input id="abrevAval_65757145" type="hidden" value="PR03"/>
 <input id="denAval_65757145" type="hidden" value="prova 03"/>
 <input id="notaAval_65757145" type="hidden" value=""/>
 <input id="pesoAval_65757145" type="hidden" value="1"/>
 <th class="nota" id="unid">Nota</th>
-<th></th><th></th><th></th><th></th><th></th>
+<th></th><th></th><th></th>
 </tr>
 </thead>
 <tbody>
@@ -221,7 +427,8 @@
 								8,0</td>
 <td class="nota">
 								9,0</td>
-
+<td class="nota">
+</td>
 <td class="nota" style="border-right: 1px solid #888;">
 </td>
 <td class="nota" style="border-right: 1px solid #888;">
@@ -232,12 +439,10 @@
 <!-- Fim Custom Esig #73921 -->
 <td style="border-right: 1px solid #888; text-align:right;">
 				0</td>
-<td style="text-align: left;">
-						MATRICULADO</td>
 </tr>
 </tbody>
 </table>
-</div><br/><br/> <strong>INGLÊS FASE 3 NIVEL 3</strong><div class="notas" style="clear: both;">
+</div><br/><br/><br/><br/> <strong>INGLÊS FASE 3 NIVEL 3</strong><div class="notas" style="clear: both;">
 <table class="tabelaRelatorio" width="100%">
 <caption></caption>
 <thead>
@@ -250,7 +455,6 @@
 <th class="nota" width="5%">Resultado Final</th>
 <!-- Fim Custom Esig #73921 -->
 <th style="text-align: right;" width="5%">Faltas</th>
-
 </tr>
 </thead>
 <tbody>
@@ -267,11 +471,10 @@
 <!-- Fim Custom Esig #73921 -->
 <td style="border-right: 1px solid #888; text-align:right;">
 				0</td>
-
 </tr>
 </tbody>
 </table>
-</div><br/><br/> <strong>MATEMÁTICA</strong><div class="notas" style="clear: both;">
+</div><br/><br/><br/><br/> <strong>MATEMÁTICA</strong><div class="notas" style="clear: both;">
 <table class="tabelaRelatorio" width="100%">
 <caption></caption>
 <thead>
@@ -284,7 +487,6 @@
 <th class="nota" width="5%">Resultado Final</th>
 <!-- Fim Custom Esig #73921 -->
 <th style="text-align: right;" width="5%">Faltas</th>
-
 </tr>
 <tr bgcolor="#C4D2EB" id="trAval">
 <th class="nota" id="aval_65141971">E1·1</th>
@@ -307,8 +509,8 @@
 <input id="denAval_65142044" type="hidden" value="Prova 2"/>
 <input id="notaAval_65142044" type="hidden" value=""/>
 <input id="pesoAval_65142044" type="hidden" value="5"/>
-
-<th></th><th></th><th></th><th></th><th></th>
+<th class="nota" id="unid">Nota</th>
+<th></th><th></th><th></th>
 </tr>
 </thead>
 <tbody>
@@ -323,7 +525,8 @@
 </td>
 <td class="nota">
 </td>
-
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
 <td class="nota" style="border-right: 1px solid #888;">
 </td>
 <!-- In&#237;cio Custom Esig #73921 -->
@@ -332,12 +535,10 @@
 <!-- Fim Custom Esig #73921 -->
 <td style="border-right: 1px solid #888; text-align:right;">
 				0</td>
-<td style="text-align: left;">
-						MATRICULADO</td>
 </tr>
 </tbody>
 </table>
-</div><br/><br/> <strong>MÚSICA 03</strong><div class="notas" style="clear: both;">
+</div><br/><br/><br/><br/> <strong>MÚSICA 03</strong><div class="notas" style="clear: both;">
 <table class="tabelaRelatorio" width="100%">
 <caption></caption>
 <thead>
@@ -353,7 +554,6 @@
 <th class="nota" width="5%">Resultado Final</th>
 <!-- Fim Custom Esig #73921 -->
 <th style="text-align: right;" width="5%">Faltas</th>
-
 </tr>
 </thead>
 <tbody>
@@ -376,11 +576,10 @@
 <!-- Fim Custom Esig #73921 -->
 <td style="border-right: 1px solid #888; text-align:right;">
 				0</td>
-
 </tr>
 </tbody>
 </table>
-</div><br/><br/> <strong>PORTUGUÊS E HISTÓRIA DA LITERATURA BRASILEIRA</strong><div class="notas" style="clear: both;">
+</div><br/><br/><br/><br/> <strong>PORTUGUÊS E HISTÓRIA DA LITERATURA BRASILEIRA</strong><div class="notas" style="clear: both;">
 <table class="tabelaRelatorio" width="100%">
 <caption></caption>
 <thead>
@@ -393,7 +592,6 @@
 <th class="nota" width="5%">Resultado Final</th>
 <!-- Fim Custom Esig #73921 -->
 <th style="text-align: right;" width="5%">Faltas</th>
-
 </tr>
 </thead>
 <tbody>
@@ -410,11 +608,10 @@
 <!-- Fim Custom Esig #73921 -->
 <td style="border-right: 1px solid #888; text-align:right;">
 				0</td>
-
 </tr>
 </tbody>
 </table>
-</div><br/><br/> <strong>QUÍMICA</strong><div class="notas" style="clear: both;">
+</div><br/><br/><br/><br/> <strong>QUÍMICA</strong><div class="notas" style="clear: both;">
 <table class="tabelaRelatorio" width="100%">
 <caption></caption>
 <thead>
@@ -427,7 +624,6 @@
 <th class="nota" width="5%">Resultado Final</th>
 <!-- Fim Custom Esig #73921 -->
 <th style="text-align: right;" width="5%">Faltas</th>
-
 </tr>
 <tr bgcolor="#C4D2EB" id="trAval">
 <th class="nota" id="aval_64067737">A1</th>
@@ -450,7 +646,7 @@
 <input id="denAval_64637099" type="hidden" value="Prática 1 - Reação relógio"/>
 <input id="notaAval_64637099" type="hidden" value=""/>
 <input id="pesoAval_64637099" type="hidden" value="1"/>
-
+<th class="nota" id="aval_64756039">Lab2</th>
 <input id="abrevAval_64756039" type="hidden" value="Lab2"/>
 <input id="denAval_64756039" type="hidden" value="Prática 2 - Fatores que afetam a velocidade de uma reação"/>
 <input id="notaAval_64756039" type="hidden" value=""/>
@@ -466,7 +662,7 @@
 <input id="notaAval_65526585" type="hidden" value=""/>
 <input id="pesoAval_65526585" type="hidden" value="1"/>
 <th class="nota" id="unid">Nota</th>
-<th></th><th></th><th></th><th></th><th></th>
+<th></th><th></th><th></th>
 </tr>
 </thead>
 <tbody>
@@ -481,7 +677,8 @@
 </td>
 <td class="nota">
 								10,0</td>
-
+<td class="nota">
+								10,0</td>
 <td class="nota">
 								8,0</td>
 <td class="nota">
@@ -496,12 +693,10 @@
 <!-- Fim Custom Esig #73921 -->
 <td style="border-right: 1px solid #888; text-align:right;">
 				0</td>
-<td style="text-align: left;">
-						MATRICULADO</td>
 </tr>
 </tbody>
 </table>
-</div><br/><br/> <strong>VOLEIBOL MISTO 03</strong><div class="notas" style="clear: both;">
+</div><br/><br/><br/><br/> <strong>VOLEIBOL MISTO 03</strong><div class="notas" style="clear: both;">
 <table class="tabelaRelatorio" width="100%">
 <caption></caption>
 <thead>
@@ -513,7 +708,6 @@
 <th class="nota" width="5%">Resultado Final</th>
 <!-- Fim Custom Esig #73921 -->
 <th style="text-align: right;" width="5%">Faltas</th>
-
 </tr>
 </thead>
 <tbody>
@@ -528,23 +722,25 @@
 <!-- Fim Custom Esig #73921 -->
 <td style="border-right: 1px solid #888; text-align:right;">
 				0</td>
-
 </tr>
 </tbody>
 </table>
-</div><br/><br/>
+</div><br/><br/><br/><br/>
       <footer>
         <div>
           <h3>Horarios de Manutenção</h3>
-          <p>segunda-feira—sexta-feira</p>
-          <p>18h — 19h</p>
+          <p>Instável devido a o site estar em desenvolvimento</p>
+          <!--<p>segunda-feira—sexta-feira</p>
+          <p>18h — 19h</p>-->
         </div>
         <div>
           <h3>Contato</h3>
           <p>sigaav2@gmail.com</p>
       
-
+          
         </div>
       </footer>
 </body>
+<h6 style="text-align: center ;"><a href="/LICENSE">© 2025 SigaaV2. Todos os direitos reservados.</a></h6>
+
 </html>

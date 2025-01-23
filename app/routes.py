@@ -143,19 +143,11 @@ def atualizacoes():
 def login(usuario, senha):
     app = Flask(__name__)
     chrome_options = Options()
-    chrome_options.add_argument("--headless")  
-    #endregion
-#region Ativar modo headless
-    chrome_options.add_argument("--disable-gpu")  
-    #endregion
-#region Desativar uso de GPU (recomendado no modo headless)
-    chrome_options.add_argument("--window-size=1920x1080")  
-    #endregion
-#region Definir resolução
-    chrome_options.add_argument("--no-sandbox")  
-    #endregion
-#region Necessário em alguns sistemas
-    chrome_options.add_argument("--disable-dev-shm-usage")  
+    chrome_options.add_argument("--headless")  # Executar em modo headless
+    chrome_options.add_argument("--disable-gpu")  # Necessário em alguns sistemas
+    chrome_options.add_argument("--no-sandbox")  # Requerido em alguns ambientes como Docker
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Prevenir problemas de memória em ambientes limitados
+
     #endregion
 #region Prevenir problemas de memória
     navegador = webdriver.Chrome(options=chrome_options)
@@ -255,24 +247,33 @@ def login(usuario, senha):
 
     
     #endregion
-    WebDriverWait(navegador, 5).until(EC.presence_of_element_located((By.XPATH, "//table[.//acronym[@title='Média de Conclusão']]")))
-    tabela_desejada = navegador.find_element(By.XPATH, "//table[.//acronym[@title='Média de Conclusão']]")
-
-    # Capturar as linhas e colunas
-    linhas = tabela_desejada.find_elements(By.TAG_NAME, "tr")
-    info = []
-
-    # Iterar pelas linhas da tabela
-    for linha in linhas:
-        colunas = linha.find_elements(By.TAG_NAME, "td")
-        dados = [coluna.text.strip() for coluna in colunas if coluna.text.strip()]  # Ignorar colunas vazias
-        if dados:  # Apenas adicionar se houver dados na linha
-            info.append(dados)
-
-    # Formatando a saída final com quebra de linhas
-    resultado_info = "<br>".join(["".join(linha) for linha in info])  # Adiciona separadores e novas linhas
 
 
+    # Aguarda até que pelo menos uma tabela que contenha "Matrícula:" esteja visível
+    try: WebDriverWait(navegador, 4).until(
+        EC.presence_of_all_elements_located((By.XPATH, "//table[.//td[contains(text(), 'Matrícula:')]]"))
+        )
+    except:
+        return "erro"
+    # Captura todas as tabelas que contêm "Matrícula:"
+    tabelas = navegador.find_elements(By.XPATH, "//table[.//td[contains(text(), 'Matrícula:')]]")
+    
+    print(f"Número de tabelas encontradas: {len(tabelas)}")
+    
+    # Iterar pelas tabelas para processar ou selecionar uma específica
+    for index, tabela in enumerate(tabelas):
+        print(f"\nTabela {index + 1}:")
+        resultado_info = tabela.get_attribute('outerHTML')  # Exibe o HTML da tabela
+        # Parsear o HTML com BeautifulSoup
+    soup = BeautifulSoup(resultado_info, "html.parser")
+
+    # Localizar e remover o elemento <a>
+    link = soup.find("a", text="Detalhar")  # Localiza o elemento <a> pelo texto
+    if link:
+        link.decompose()  # Remove o elemento do HTML
+
+    # Obter o HTML atualizado
+    resultado_info = soup.prettify()
 #region Tratar alertas, caso ocorram
     handle_alert()
     rows = navegador.find_elements(By.XPATH, "//table/tbody/tr")

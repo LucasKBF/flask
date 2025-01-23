@@ -177,6 +177,9 @@ font-size: 14px;
 }
 .info {
   text-align: center;
+  align-items: center;
+  margin-left: 600px;
+  margin-right: 600px;
 }
 /* Media Queries */
 @media (max-width: 768px) {
