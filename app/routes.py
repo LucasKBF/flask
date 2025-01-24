@@ -273,7 +273,10 @@ def login(usuario, senha):
     # Localizar e remover o elemento <a>
     link = soup.find("a", text="Detalhar")  # Localiza o elemento <a> pelo texto
     if link:
-        link.decompose()  # Remove o elemento do HTML
+        for elemento in link.find_all_next():
+            elemento.decompose()  # Remove todos os elementos após o ponto de corte
+        link.decompose()
+
 
     # Obter o HTML atualizado
     resultado_info = soup.prettify()

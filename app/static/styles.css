@@ -1,7 +1,11 @@
 body {
   margin: 0;
+  padding: 0;
+  height: 100%;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
   font-family: Arial, sans-serif;
-  color: #333;
+
 }
 
 header {
@@ -42,6 +46,9 @@ header nav a.botao {
   background: linear-gradient(to bottom right, #4A00E0, #8E2DE2);
   color: white;
   padding: 100px 20px;
+  display: flex;
+  flex-direction: column; /* Coloca os itens em uma coluna (verticalmente) */
+  
 }
 
 .hero h2 {
@@ -176,11 +183,17 @@ font-size: 14px;
   font-size: 30px;
 }
 .info {
+  background: linear-gradient(to bottom right, #e2d3ff6d, #9f3ff27c);
+  padding: 20px 40px;
+  font-size: 18px;
+  border: 2px solid rgb(119, 0, 255);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column; /* Coloca os itens em uma coluna (verticalmente) */
+  align-items: center; /* Centraliza os itens horizontalmente */
   text-align: center;
-  align-items: center;
-  margin-left: 600px;
-  margin-right: 600px;
 }
+
 /* Media Queries */
 @media (max-width: 768px) {
   header, footer {
