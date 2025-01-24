@@ -9,16 +9,19 @@ with open(r"C:\Users\lucas\OneDrive\Área de Trabalho\SigaaV2\app\manu.txt", "r"
 @app.before_request
 def verifica_manutencao():
     global em_manutencao
-    
-    #endregion
-#region Ignorar requisições para arquivos estáticos
-    if em_manutencao == "True" and not (request.endpoint == 'manutencao' or request.endpoint.startswith('templates/static')):
+
+    # Ignorar arquivos estáticos (ex.: CSS, JS, imagens) e a página de manutenção
+    if em_manutencao == "True" and not (
+        request.path.startswith('/static/') or
+
+        request.path == url_for('manutencao')
+    ):
         return redirect(url_for('manutencao'))
 
 @app.route('/manutencao')
 def manutencao():
     if em_manutencao=="False":
-        return redirect(url_for('/'))
+        return redirect(url_for("index"))
     else:
         return render_template('manutenção.html')
 
@@ -26,7 +29,7 @@ def manutencao():
 def favicon():
     return send_from_directory('templates/static', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
-@app.route("/")
+@app.route("/index")
 @app.route("/")
 def index():
     return render_template("index.html")

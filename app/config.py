@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from app import app
 from flask import render_template
-from flask import Flask, request, jsonify, redirect, url_for, flash, send_from_directory
+from flask import Flask, request, jsonify, redirect, url_for, flash, send_from_directory, current_app
 from markupsafe import Markup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
