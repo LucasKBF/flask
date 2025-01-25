@@ -257,7 +257,7 @@ def login(usuario, senha):
         EC.presence_of_all_elements_located((By.XPATH, "//table[.//td[contains(text(), 'Matrícula:')]]"))
         )
     except:
-        return "erro"
+        return "erro", atv, resultado_info
     # Captura todas as tabelas que contêm "Matrícula:"
     tabelas = navegador.find_elements(By.XPATH, "//table[.//td[contains(text(), 'Matrícula:')]]")
     
@@ -323,13 +323,17 @@ def login(usuario, senha):
         except Exception as e:
             erros.append(e)
             continue
+    atv= '<p style="text-align: center;"> Serviço em manutenção. </p>'
+    """
     if atividades:
         atv = atividades
     else:
         atv = '<p style="text-align: center;"> Nenhuma atividade encontrada.</p>'
+    """
     resultados = []
     nomes_turmas = []
     html_notas = []
+    
     try:
         WebDriverWait(navegador, 5).until(EC.presence_of_element_located((By.ID, "form_acessarTurmaVirtual:turmaVirtual")))
         print(f"Acessando turma: BIOLOGIA")

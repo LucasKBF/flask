@@ -46,8 +46,7 @@ header nav a.botao {
   background: linear-gradient(to bottom right, #4A00E0, #8E2DE2);
   color: white;
   padding: 100px 20px;
-  display: flex;
-  flex-direction: column; /* Coloca os itens em uma coluna (verticalmente) */
+
   
 }
 
