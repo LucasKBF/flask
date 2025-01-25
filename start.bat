@@ -1,1 +1,2 @@
-from flask import Flask
+@echo off
+start cmd /k "flask run"
