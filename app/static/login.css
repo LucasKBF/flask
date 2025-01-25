@@ -257,3 +257,81 @@ a:hover {
   margin-top: -20px;
   margin-bottom: -20px;  
 }
+/* Media Queries */
+@media (max-width: 768px) {
+  header, footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+  
+
+  header nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .hero h2 {
+    font-size: 32px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  footer div {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .botaocima {
+    display: none !important;
+    
+  }
+  .botaodelogin {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px 130px;
+  }
+
+  main {
+    padding: 30px;
+    font-size: 16px;
+    width: 90%;
+  }
+}
+
+
+
+@media (max-width: 480px) {
+  .hero h2 {
+    font-size: 24px;
+  }
+
+  .hero p {
+    font-size: 14px;
+  }
+
+  header nav a {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .hero button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+  .botaocima {
+    display: none !important;
+    
+  }
+  .botaodelogin {
+    padding: 8px 15px;
+    font-size: 14px;
+  }
+
+  main {
+    padding: 20px;
+    font-size: 14px;
+  }
+
+}
