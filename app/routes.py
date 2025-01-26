@@ -148,10 +148,7 @@ def atualizacoes():
 def login(usuario, senha):
     app = Flask(__name__)
     chrome_options = Options()
-    chrome_options.add_argument("--headless")  # Executar em modo headless
-    chrome_options.add_argument("--disable-gpu")  # Necessário no modo headless
-    chrome_options.add_argument("--no-sandbox")  # Requerido em alguns ambientes
-    chrome_options.add_argument("--disable-dev-shm-usage")  # Otimiza memória
+
     #endregion
 #region Prevenir problemas de memória
     navegador = webdriver.Chrome(options=chrome_options)
@@ -238,19 +235,7 @@ def login(usuario, senha):
     password_field.send_keys(Keys.RETURN)
 
 #endregion
-#region Ver se a senha ta errada
-    
-    elements = navegador.find_elements(By.XPATH, "//center[@style='color: #922; font-weight: bold;' and text()='Usuário e/ou senha inválidos']")
-    
-    if elements:
-        print("Elemento encontrado!")
-    else:
-        print("Elemento não encontrado!")
 
-
-
-    
-    #endregion
 
 
     # Aguarda até que pelo menos uma tabela que contenha "Matrícula:" esteja visível

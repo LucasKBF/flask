@@ -177,13 +177,19 @@
     const loadingDiv = document.getElementById("loading");
     loadingDiv.classList.remove("hidden");
     const details = document.getElementById("loadingDetails");
-    details.textContent = "Conectando ao Sigaa...";
+
+    // Remover conteúdo anterior
+    details.textContent = "";
+
+    // Adicionar textos com quebras de linha
+    details.appendChild(document.createTextNode("Conectando ao Sigaa..."));
+    details.appendChild(document.createElement("br")); 
+    details.appendChild(document.createTextNode("(Isso demora cerca de 1 minuto)"));
 
     setTimeout(() => {
       details.textContent = "Buscando Notas";
     }, 127500);
-  }
-
+}
   function validarFormulario() {
     const usuario = document.getElementById("usuario").value.trim();
     const senha = document.getElementById("senha").value.trim();
