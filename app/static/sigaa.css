@@ -4,7 +4,7 @@ body {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f9;
+    background-color: rgb(201, 201, 201);
     color: #333;
 }
 
@@ -25,7 +25,7 @@ header nav a {
 
 .hero {
     text-align: center;
-    color: white;
+    background-color: rgb(201, 201, 201);
     padding: 3rem 1rem;
 }
 
@@ -44,13 +44,13 @@ header nav a {
     text-align: center;
     font-size: 2rem;
     margin-top: 2rem;
-    color: #9643f5;
+    color: #7700ff;
 }
 
 .notas {
     margin: 2rem auto;
     padding: 1rem;
-    background-color: white;
+    background-color: rgba(111, 0, 180, 0.571);
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     max-width: 900px;

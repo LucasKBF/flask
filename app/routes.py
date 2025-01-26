@@ -147,7 +147,6 @@ def login(usuario, senha):
     app = Flask(__name__)
     chrome_options = Options()
 
-
     #endregion
 #region Prevenir problemas de memória
     navegador = webdriver.Chrome(options=chrome_options)
@@ -254,7 +253,8 @@ def login(usuario, senha):
         EC.presence_of_all_elements_located((By.XPATH, "//table[.//td[contains(text(), 'Matrícula:')]]"))
         )
     except:
-        return "erro", atv, resultado_info
+        navegador.quit()
+        return "erro", "erro", "erro"
     # Captura todas as tabelas que contêm "Matrícula:"
     tabelas = navegador.find_elements(By.XPATH, "//table[.//td[contains(text(), 'Matrícula:')]]")
     
@@ -349,7 +349,8 @@ def login(usuario, senha):
         nomes_turmas.append("BIOLOGIA")
         html_notas.append(navegador.page_source)
     except:
-        return "erro"
+        navegador.quit()
+        return "erro", "erro", "erro"
     
     #endregion
 #region URL da página inicial
@@ -466,4 +467,5 @@ def login(usuario, senha):
         print("Erros armazenados:", erros)
 
     print("Nomes das turmas coletados:", nomes_turmas)
+    navegador.quit()
     return resultado_final, atv, resultado_info
