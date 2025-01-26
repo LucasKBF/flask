@@ -148,7 +148,10 @@ def atualizacoes():
 def login(usuario, senha):
     app = Flask(__name__)
     chrome_options = Options()
-
+    chrome_options.add_argument("--headless=new")
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
     #endregion
 #region Prevenir problemas de memória
     navegador = webdriver.Chrome(options=chrome_options)
