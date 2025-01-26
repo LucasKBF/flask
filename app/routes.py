@@ -1,8 +1,9 @@
 from app.config import *
 
-with open(r"C:\Users\lucas\Desktop\SigaaV2\app\manu.txt", "r") as arquivo:
+#with open(r"C:\Users\lucas\Desktop\SigaaV2\app\manu.txt", "r") as arquivo:
 #with open(r"C:\Users\lucas\OneDrive\Área de Trabalho\SigaaV2\app\manu.txt", "r") as arquivo:
 #with open(r"C:\Users\Victor\codes\GitHub\SigaaV2\app\manu.txt", "r") as arquivo:
+with open(r"manu.txt", "r") as arquivo:
     manu = arquivo.read()
     em_manutencao = manu
 
@@ -147,7 +148,10 @@ def atualizacoes():
 def login(usuario, senha):
     app = Flask(__name__)
     chrome_options = Options()
-
+    chrome_options.add_argument("--headless")  # Executar em modo headless
+    chrome_options.add_argument("--disable-gpu")  # Necessário no modo headless
+    chrome_options.add_argument("--no-sandbox")  # Requerido em alguns ambientes
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Otimiza memória
     #endregion
 #region Prevenir problemas de memória
     navegador = webdriver.Chrome(options=chrome_options)
