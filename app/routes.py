@@ -146,10 +146,7 @@ def atualizacoes():
 def login(usuario, senha):
     app = Flask(__name__)
     chrome_options = Options()
-    chrome_options.add_argument("--headless")  # Executar em modo headless
-    chrome_options.add_argument("--disable-gpu")  # Necessário em alguns sistemas
-    chrome_options.add_argument("--no-sandbox")  # Requerido em alguns ambientes como Docker
-    chrome_options.add_argument("--disable-dev-shm-usage")  # Prevenir problemas de memória em ambientes limitados
+
 
     #endregion
 #region Prevenir problemas de memória
