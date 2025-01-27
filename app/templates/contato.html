@@ -1,57 +1,60 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SigaaV2 - [Contato]</title>
-  <link rel="stylesheet" href="/static/styles.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
-</head>
-<body>
-  
- {% include 'aceitartermos.virk' %}
- {% include 'header.virk' %}
-  {{ status|safe }}
-  <main>
-    <section class="hero">
-      <h2>Contato</h2>
-      <p>Entre em contato em caso de dúvidas ou caso queira deixar um feedback sobre o site.</p>
-    </section>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SigaaV2 - [Contato]</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+  </head>
+  <body>
 
-    <section class="content">
-      <form action="/contato" method="post">
-        <label for="nome">Nome</label>
-        <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
-  
-        <label for="email">E-mail</label>
-        <input type="email" id="email" name="email" placeholder="Seu e-mail" required>
-  
-        <label for="mensagem">Mensagem</label>
-        <textarea id="mensagem" name="mensagem" placeholder="Sua mensagem" rows="5" required></textarea>
-  
-        <button type="submit">Enviar</button>
+    {% include 'aceitartermos.virk' %}
+    {% include 'header.virk' %}
+    {{ status|safe }}
+    <main>
+      <section class="hero">
+        <h2>Contato</h2>
+        <p>Entre em contato em caso de dúvidas ou caso queira deixar um feedback
+          sobre o site.</p>
+      </section>
 
-      </form>
-    </section>
-  </main>
-  
+      <section class="content">
+        <form action="/contato" method="post">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" placeholder="Seu nome"
+            required>
 
-  <footer>
-    <div>
-      <h3>Horarios de Manutenção</h3>
-      <p>Instável devido a o site estar em desenvolvimento</p>
-      <!--<p>segunda-feira—sexta-feira</p>
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" placeholder="Seu e-mail"
+            required>
+
+          <label for="mensagem">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" placeholder="Sua mensagem"
+            rows="5" required></textarea>
+
+          <button type="submit">Enviar</button>
+
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <div>
+        <h3>Horarios de Manutenção</h3>
+        <p>Instável devido a o site estar em desenvolvimento</p>
+        <!--<p>segunda-feira—sexta-feira</p>
       <p>18h — 19h</p>-->
-    </div>
-    <div>
-      <h3>Contato</h3>
-      <p><a href="mailto:sigaav2@gmail.com?subject=Suporte">sigaav2@gmail.com</a></p>
-      
+      </div>
+      <div>
+        <h3>Contato</h3>
+        <p><a
+            href="mailto:sigaav2@gmail.com?subject=Suporte">sigaav2@gmail.com</a></p>
 
-    </div>
-  </footer>
-</body>
-{% include 'lisencafooter.virk' %}
+      </div>
+    </footer>
+  </body>
+  {% include 'lisencafooter.virk' %}
 
 </html>
