@@ -1,15 +1,132 @@
 
 
-<header>
-    <h1><a class="alink" class="inicio" href="/" style="font-size: 30px;">SigaaV2</a></h1>
-    <nav>
-      <a class="alink" href="/contato">Contato</a>
-      <a class="alink" href="/atualizacoes">Atualizações</a>
-      <a class="alink" href="/sobre">Sobre</a>
-      <a class="alink" href="/segurança">Segurança</a>
-      <a class="alink" href="/creditos">Creditos</a>
-      <a class="alink" href="/termosdeservico">Termos de Serviço</a>
-      <a class="alink" href="/politicadeprivacidade">Politica de Privacidade</a>
-      <a class="alink" href="/autenticar">Entrar</a>
-    </nav>
-  </header>
+<style>
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  header h1 {
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  header nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  header nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  header nav a.botao {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+  
+  header nav a:last-child {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+  
+  a:hover {
+    transform: scale(1.1);
+    border-radius: 5px;
+  }
+  .alink {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #00000000;
+    color: #000000;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .dropdown {
+    float: left;
+    overflow: hidden;
+  }
+  
+  .dropdown .dropbtn {
+    font-size: 16px;  
+    border: none;
+    outline: none;
+    color: rgb(0, 0, 0);
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+    
+  }
+  
+  .navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: rgba(137, 43, 226, 0.493);
+    border-radius: 10px;
+  }
+  
+  .dropdown-content {
+    border-radius: 10px;
+    display: none;
+    position: absolute;
+    background-color: #e2dfdf;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    margin-left: -30px;
+  }
+  
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .dropdown-content a:hover {
+    background-color:rgb(202, 188, 206);
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  </style>
+  
+  
+  <header class="navbar">
+      <h1><a class="alink" class="inicio" href="/" style="font-size: 30px;">SigaaV2</a></h1>
+      <nav>
+        <a class="alink" href="/contato">Contato</a>
+        <a class="alink" href="/atualizacoes">Atualizações</a>
+        <a class="alink" href="/sobre">Sobre</a>
+        <a class="alink" href="/segurança">Segurança</a>
+        <a class="alink" href="/creditos">Creditos</a>
+        <div class="dropdown alink" style="cursor: pointer;">
+          <a class="alink" style="cursor: pointer;">Direitos Legais</a>
+          <div class="dropdown-content">
+            <a class="alink" href="/termosdeservico">Termos de Serviço</a>
+            <a class="alink" href="/politicadeprivacidade">Politica de Privacidade</a>
+            <a class="alink" href="/LICENSE">Lisença</a>
+          </div>
+        </div> 
+        <!--<a class="alink" href="/termosdeservico">Termos de Serviço</a>
+        <a class="alink" href="/politicadeprivacidade">Politica de Privacidade</a>-->
+        <a class="alink" href="/autenticar">Entrar</a>
+      </nav>
+    </header>
