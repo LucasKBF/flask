@@ -81,6 +81,10 @@ def politicadeprivacidade():
 def license():
     return render_template("LICENSE.html")
 
+@app.route('/teste')
+def teste():
+    return render_template("a.html")
+
 @app.route('/contato', methods=['GET', 'POST'])
 def contato():
     status = ""
