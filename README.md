@@ -36,7 +36,7 @@ Acesse o projeto em: [https://sigaav2.com.br](https://sigaav2.com.br)
 ---
 
 ### **Licença**
-Este projeto está sob a licença **MIT**. Consulte o arquivo `LICENSE` para mais detalhes.
+Este projeto está sob a licença **Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International**. Consulte o arquivo `LICENSE` para mais detalhes.
 
 ---
 
@@ -67,7 +67,7 @@ Access the project at: [https://sigaav2.com.br](https://sigaav2.com.br)
 
 
 ### **License**
-This project is licensed under the **MIT License**. See the `LICENSE` file for details.
+This project is licensed under the **Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International**. See the `LICENSE` file for details.
 
 ---
 
