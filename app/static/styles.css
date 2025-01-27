@@ -4,7 +4,8 @@ body {
   height: 100%;
   justify-content: center; /* Centraliza horizontalmente */
   align-items: center; /* Centraliza verticalmente */
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Arial, sans-serif;
+
 }
 
 header {

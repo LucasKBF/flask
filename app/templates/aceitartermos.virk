@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/static/styles.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
-  <title>SigaaV2</title>
-</head>
-<body>
-  
-<<<<<<< Updated upstream
-  <style>
+<style>
 
     .botaodetermo{
       margin-top: 10px;
@@ -21,7 +8,6 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      
     }
   /* Estilização do popup */
     .popup {
@@ -110,42 +96,3 @@
       document.getElementById("overlay").classList.add("hidden");
     });
   </script>
-  <header>
-    <h1 ><a class="alink" class="inicio" href="/"; style="font-size: 30px;">SigaaV2</a></h1>
-    <nav>
-      <a class="alink" href="/contato">Contato</a>
-      <a class="alink" href="/atualizacoes">Atualizações</a>
-      <a class="alink" href="/sobre">Sobre</a>
-      <a class="alink" href="/segurança">Segurança</a>
-      <a class="alink" href="/creditos">Creditos</a>
-      <a class="alink" href="/termosdeservico">Termos de Serviço</a>
-      <a class="alink" href="/politicadeprivacidade">Politica de Privacidade</a>
-      <a class="alink" href="/autenticar">Entrar</a>
-    </nav>
-  </header>
-=======
- {% include 'aceitartermos.virk' %}
-  {% include 'header.virk' %}
->>>>>>> Stashed changes
-  <div class="hero">
-    <h2>SigaaV2</h2>
-    <p>Site destinado à trazer uma interface mais limpa e útil do Sigaa.</p>
-    <button onclick="window.location.href='/autenticar';" class="botao">Entrar</button>
-  </div>
-  <footer>
-    <div>
-      <h3>Horarios de Manutenção</h3>
-      <p>Instável devido a o site estar em desenvolvimento</p>
-      <!--<p>segunda-feira—sexta-feira</p>
-      <p>18h — 19h</p>-->
-    </div>
-    <div>
-      <h3>Contato</h3>
-      <p>sigaav2@gmail.com</p>
-    </div>
-  </footer>
-  <h6 style="text-align: center ;"><a href="/LICENSE">© 2025 SigaaV2. Todos os direitos reservados.</a></h6>
-
-</body>
-</html>
-
