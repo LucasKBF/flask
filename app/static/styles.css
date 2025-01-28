@@ -43,7 +43,7 @@ header nav a.botao {
 .hero {
   text-align: center;
   background: linear-gradient(to bottom right, #4A00E0, #8E2DE2);
-  color: white;
+  color: rgb(255, 0, 0);
   padding: 100px 20px;
 
   
