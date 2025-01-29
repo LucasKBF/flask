@@ -86,15 +86,19 @@
     details.appendChild(document.createTextNode("Conectando ao Sigaa..."));
     details.appendChild(document.createElement("br")); 
     details.appendChild(document.createTextNode("(Isso demora cerca de 1 minuto)"));
-
+  if (notasfaltas.checked === true) {
+    setTimeout(() => {
+      details.textContent = "Buscando Faltas";
+    }, 127500);
+  } else {
     setTimeout(() => {
       details.textContent = "Buscando Notas";
     }, 127500);
-}
+  }}
   function validarFormulario() {
     const usuario = document.getElementById("usuario").value.trim();
     const senha = document.getElementById("senha").value.trim();
-
+    const notasfaltas = document.getElementById("notasfaltas").checked ? "on" : "";
 
     if (usuario === "" || senha === "") {
       alert("Usuário e senha são obrigatórios.");

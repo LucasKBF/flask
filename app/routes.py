@@ -48,7 +48,8 @@ def frequencia():
 def autenticar():
     usuario= request.form.get("usuario")
     senha= request.form.get("senha")
-    notas1, atividades, resultado_info = login (usuario, senha)
+    notasfaltas = request.form.get("notasfaltas")
+    notas1, atividades, resultado_info = login (usuario, senha, notasfaltas)
     notas2 = Markup(notas1)
     atividades2 = Markup(atividades)
     resultado_info2 = Markup(resultado_info)
@@ -154,7 +155,7 @@ def atualizacoes():
     return render_template("atualizacoes.html")
 
 
-def login(usuario, senha):
+def login(usuario, senha, notasfaltas):
     app = Flask(__name__)
     chrome_options = Options()
     chrome_options.add_argument("--headless=new")
@@ -333,142 +334,267 @@ def login(usuario, senha):
     nomes_turmas = []
     html_notas = []
     
-    try:
-        WebDriverWait(navegador, 5).until(EC.presence_of_element_located((By.ID, "form_acessarTurmaVirtual:turmaVirtual")))
-        print(f"Acessando turma: BIOLOGIA")
-        botao = navegador.find_element(By.ID, f"form_acessarTurmaVirtual:turmaVirtual")  
-        #endregion
-#region Altere para o método de localização correto (ID, Nome, XPath, etc.)
-        botao.click()
-        botao = navegador.find_element(By.CLASS_NAME, "itemMenuHeaderAlunos")  
-        #endregion
-#region Altere para o método de localização correto (ID, Nome, XPath, etc.)
-        botao.click()
-        botao = navegador.find_element(By.XPATH, "//div[text()='Ver Notas']")  
-        #endregion
-#region Altere para o método de localização correto (ID, Nome, XPath, etc.)
-        botao.click()
-        nomes_turmas.append("BIOLOGIA")
-        html_notas.append(navegador.page_source)
-    except:
-        navegador.quit()
-        return "erro", "erro", "erro"
-    
-    #endregion
-#region URL da página inicial
-    url_inicial = "https://sigaa.ifsc.edu.br/sigaa/portais/discente/discente.jsf"
-    navegador.get(url_inicial)
-
-    
-    #endregion
-#region Loop para percorrer os IDs dinâmicos
-    for x in range(1, 10):  
-        #endregion
-#region Ajuste o range conforme necessário
+    if notasfaltas == "on":
         try:
-            
+            WebDriverWait(navegador, 5).until(EC.presence_of_element_located((By.ID, "form_acessarTurmaVirtual:turmaVirtual")))
+            print(f"Acessando turma: BIOLOGIA")
+            botao = navegador.find_element(By.ID, f"form_acessarTurmaVirtual:turmaVirtual")  
             #endregion
-#region Gerar o seletor de ID dinâmico
-            id_selector = f"form_acessarTurmaVirtualj_id_{x}:turmaVirtual"
-
-            
+    #region Altere para o método de localização correto (ID, Nome, XPath, etc.)
+            botao.click()
+            botao = navegador.find_element(By.CLASS_NAME, "itemMenuHeaderAlunos")  
             #endregion
-#region Esperar o elemento com o ID dinâmico estar presente
-            WebDriverWait(navegador, 5).until(EC.presence_of_element_located((By.ID, id_selector)))
-
-            
+    #region Altere para o método de localização correto (ID, Nome, XPath, etc.)
+            botao.click()
+            botao = navegador.find_element(By.XPATH, "//div[text()='Frequência']")  
             #endregion
-#region Encontrar o elemento e obter o nome da turma
-            elemento_turma = navegador.find_element(By.ID, id_selector)
-            nome_turma = elemento_turma.text.strip()
-            if nome_turma:  
-                nomes_turmas.append(nome_turma)
-                print(f"Acessando turma: {nome_turma}")
-                elemento_turma.click()
-                WebDriverWait(navegador, 10).until(
-                    EC.element_to_be_clickable((By.XPATH, "//div[text()='Ver Notas']"))
-                )
-                botao_notas = navegador.find_element(By.XPATH, "//div[text()='Ver Notas']")
-                botao_notas.click()
-                
-                html_notas.append(navegador.page_source)
-
-                navegador.get(url_inicial)
-
-
-        except Exception as e:
-            erro_msg = f"Erro ao processar o ID {id_selector}: {str(e)}"
-            erros.append(erro_msg)
-            navegador.get(url_inicial) 
-            continue
-
-            #endregion
+    #region Altere para o método de localização correto (ID, Nome, XPath, etc.)
+            botao.click()
+            nomes_turmas.append("BIOLOGIA")
+            html_notas.append(navegador.page_source)
+        except:
+            navegador.quit()
+            return "erro", "erro", "erro"
+        
+        #endregion
+    #region URL da página inicial
+        url_inicial = "https://sigaa.ifsc.edu.br/sigaa/portais/discente/discente.jsf"
+        navegador.get(url_inicial)
 
         
+        #endregion
+    #region Loop para percorrer os IDs dinâmicos
+        for x in range(1, 10):  
+            #endregion
+    #region Ajuste o range conforme necessário
+            try:
+                
+                #endregion
+    #region Gerar o seletor de ID dinâmico
+                id_selector = f"form_acessarTurmaVirtualj_id_{x}:turmaVirtual"
+
+                
+                #endregion
+    #region Esperar o elemento com o ID dinâmico estar presente
+                WebDriverWait(navegador, 5).until(EC.presence_of_element_located((By.ID, id_selector)))
+
+                
+                #endregion
+    #region Encontrar o elemento e obter o nome da turma
+                elemento_turma = navegador.find_element(By.ID, id_selector)
+                nome_turma = elemento_turma.text.strip()
+                if nome_turma:  
+                    nomes_turmas.append(nome_turma)
+                    print(f"Acessando turma: {nome_turma}")
+                    elemento_turma.click()
+                    WebDriverWait(navegador, 10).until(
+                        EC.element_to_be_clickable((By.XPATH, "//div[text()='Frequência']"))
+                    )
+                    botao_notas = navegador.find_element(By.XPATH, "//div[text()='Frequência']")
+                    botao_notas.click()
+                    
+                    html_notas.append(navegador.page_source)
+
+                    navegador.get(url_inicial)
 
 
-    resultado2 = []
-    erros = []
-    log_dir = r"app\logs"
-    log_file = os.path.join(log_dir, "log.txt")
+            except Exception as e:
+                erro_msg = f"Erro ao processar o ID {id_selector}: {str(e)}"
+                erros.append(erro_msg)
+                navegador.get(url_inicial) 
+                continue
 
-    try:
-        for idx, html in enumerate(html_notas):
-            soup = BeautifulSoup(html, 'html.parser')
+                #endregion
 
-            # Remove o último <th> na linha com id "trAval"
-            tr = soup.find('tr', id='trAval')
-            if tr:
-                th_elements = tr.find_all('th')
-                if th_elements:
-                    th_elements[-1].decompose()
+            
 
-            # Remove a última célula de cada linha de todas as tabelas
+
+        resultado2 = []
+        erros = []
+        log_dir = r"app\logs"
+        log_file = os.path.join(log_dir, "log.txt")
+
+        try:
+            for idx, html in enumerate(html_notas):
+                soup = BeautifulSoup(html, 'html.parser')
+
+                # Remove todas as ocorrências de "Alunos Matriculados"
+                for element in soup.find_all(string=lambda text: "Alunos Matriculados" in text):
+                    element.replace_with(element.replace("Alunos Matriculados", ""))
+
+                # Adiciona a div com a classe 'notas' ao resultado
+                notas_div = soup.find('fieldset')
+                if notas_div:
+                    div_str = str(notas_div)
+                    resultado2.append(f"<strong>{nomes_turmas[idx]}</strong>{div_str}<br><br><br><br>")
+            
+            # Converte o resultado final para string
+            resultado = " ".join(resultado2)
+            soup = BeautifulSoup(resultado, 'html.parser')
+
+            # Itera pelas tabelas para remover colunas específicas
             for table in soup.find_all('table'):
+                headers = table.find('tr').find_all('th')
+                indices_to_remove = [index for index, header in enumerate(headers) if header.text.strip().lower() in ['matrícula', 'nome']]
+
                 for row in table.find_all('tr'):
                     cells = row.find_all(['th', 'td'])
-                    if cells:
-                        cells[-1].decompose()
+                    for index in sorted(indices_to_remove, reverse=True):
+                        if index < len(cells):
+                            cells[index].decompose()
 
-            # Remove todas as ocorrências de "Alunos Matriculados"
-            for element in soup.find_all(string=lambda text: "Alunos Matriculados" in text):
-                element.replace_with(element.replace("Alunos Matriculados", ""))
+            # Resultado final
+            resultado_final = str(soup)
 
-            # Adiciona a div com a classe 'notas' ao resultado
-            notas_div = soup.find('div', class_='notas')
-            if notas_div:
-                div_str = str(notas_div)
-                resultado2.append(f"<strong>{nomes_turmas[idx]}</strong>{div_str}<br><br><br><br>")
+        except Exception as e:
+            erros.append(f"Erro ao processar HTML: {e}")
+
+        # Cria o diretório de logs, se necessário, e salva os erros
+        os.makedirs(log_dir, exist_ok=True)
+        with open(log_file, "w", encoding="utf-8") as arquivo:
+            arquivo.write("\n".join(erros))
+        if erros:
+            print("Erros armazenados:", erros)
+
+        print("Nomes das turmas coletados:", nomes_turmas)
+        navegador.quit()
+        return resultado_final, atv, resultado_info
+    else:
+        try:
+            WebDriverWait(navegador, 5).until(EC.presence_of_element_located((By.ID, "form_acessarTurmaVirtual:turmaVirtual")))
+            print(f"Acessando turma: BIOLOGIA")
+            botao = navegador.find_element(By.ID, f"form_acessarTurmaVirtual:turmaVirtual")  
+            #endregion
+    #region Altere para o método de localização correto (ID, Nome, XPath, etc.)
+            botao.click()
+            botao = navegador.find_element(By.CLASS_NAME, "itemMenuHeaderAlunos")  
+            #endregion
+    #region Altere para o método de localização correto (ID, Nome, XPath, etc.)
+            botao.click()
+            botao = navegador.find_element(By.XPATH, "//div[text()='Ver Notas']")  
+            #endregion
+    #region Altere para o método de localização correto (ID, Nome, XPath, etc.)
+            botao.click()
+            nomes_turmas.append("BIOLOGIA")
+            html_notas.append(navegador.page_source)
+        except:
+            navegador.quit()
+            return "erro", "erro", "erro"
         
-        # Converte o resultado final para string
-        resultado = " ".join(resultado2)
-        soup = BeautifulSoup(resultado, 'html.parser')
+        #endregion
+    #region URL da página inicial
+        url_inicial = "https://sigaa.ifsc.edu.br/sigaa/portais/discente/discente.jsf"
+        navegador.get(url_inicial)
 
-        # Itera pelas tabelas para remover colunas específicas
-        for table in soup.find_all('table'):
-            headers = table.find('tr').find_all('th')
-            indices_to_remove = [index for index, header in enumerate(headers) if header.text.strip().lower() in ['matrícula', 'nome']]
+        
+        #endregion
+    #region Loop para percorrer os IDs dinâmicos
+        for x in range(1, 10):  
+            #endregion
+    #region Ajuste o range conforme necessário
+            try:
+                
+                #endregion
+    #region Gerar o seletor de ID dinâmico
+                id_selector = f"form_acessarTurmaVirtualj_id_{x}:turmaVirtual"
 
-            for row in table.find_all('tr'):
-                cells = row.find_all(['th', 'td'])
-                for index in sorted(indices_to_remove, reverse=True):
-                    if index < len(cells):
-                        cells[index].decompose()
+                
+                #endregion
+    #region Esperar o elemento com o ID dinâmico estar presente
+                WebDriverWait(navegador, 5).until(EC.presence_of_element_located((By.ID, id_selector)))
 
-        # Resultado final
-        resultado_final = str(soup)
+                
+                #endregion
+    #region Encontrar o elemento e obter o nome da turma
+                elemento_turma = navegador.find_element(By.ID, id_selector)
+                nome_turma = elemento_turma.text.strip()
+                if nome_turma:  
+                    nomes_turmas.append(nome_turma)
+                    print(f"Acessando turma: {nome_turma}")
+                    elemento_turma.click()
+                    WebDriverWait(navegador, 10).until(
+                        EC.element_to_be_clickable((By.XPATH, "//div[text()='Ver Notas']"))
+                    )
+                    botao_notas = navegador.find_element(By.XPATH, "//div[text()='Ver Notas']")
+                    botao_notas.click()
+                    
+                    html_notas.append(navegador.page_source)
 
-    except Exception as e:
-        erros.append(f"Erro ao processar HTML: {e}")
+                    navegador.get(url_inicial)
 
-    # Cria o diretório de logs, se necessário, e salva os erros
-    os.makedirs(log_dir, exist_ok=True)
-    with open(log_file, "w", encoding="utf-8") as arquivo:
-        arquivo.write("\n".join(erros))
-    if erros:
-        print("Erros armazenados:", erros)
 
-    print("Nomes das turmas coletados:", nomes_turmas)
-    navegador.quit()
-    return resultado_final, atv, resultado_info
+            except Exception as e:
+                erro_msg = f"Erro ao processar o ID {id_selector}: {str(e)}"
+                erros.append(erro_msg)
+                navegador.get(url_inicial) 
+                continue
 
+                #endregion
+
+            
+
+
+        resultado2 = []
+        erros = []
+        log_dir = r"app\logs"
+        log_file = os.path.join(log_dir, "log.txt")
+
+        try:
+            for idx, html in enumerate(html_notas):
+                soup = BeautifulSoup(html, 'html.parser')
+
+                # Remove o último <th> na linha com id "trAval"
+                tr = soup.find('tr', id='trAval')
+                if tr:
+                    th_elements = tr.find_all('th')
+                    if th_elements:
+                        th_elements[-1].decompose()
+
+                # Remove a última célula de cada linha de todas as tabelas
+                for table in soup.find_all('table'):
+                    for row in table.find_all('tr'):
+                        cells = row.find_all(['th', 'td'])
+                        if cells:
+                            cells[-1].decompose()
+
+                # Remove todas as ocorrências de "Alunos Matriculados"
+                for element in soup.find_all(string=lambda text: "Alunos Matriculados" in text):
+                    element.replace_with(element.replace("Alunos Matriculados", ""))
+
+                # Adiciona a div com a classe 'notas' ao resultado
+                notas_div = soup.find('div', class_='notas')
+                if notas_div:
+                    div_str = str(notas_div)
+                    resultado2.append(f"<strong>{nomes_turmas[idx]}</strong>{div_str}<br><br><br><br>")
+            
+            # Converte o resultado final para string
+            resultado = " ".join(resultado2)
+            soup = BeautifulSoup(resultado, 'html.parser')
+
+            # Itera pelas tabelas para remover colunas específicas
+            for table in soup.find_all('table'):
+                headers = table.find('tr').find_all('th')
+                indices_to_remove = [index for index, header in enumerate(headers) if header.text.strip().lower() in ['matrícula', 'nome']]
+
+                for row in table.find_all('tr'):
+                    cells = row.find_all(['th', 'td'])
+                    for index in sorted(indices_to_remove, reverse=True):
+                        if index < len(cells):
+                            cells[index].decompose()
+
+            # Resultado final
+            resultado_final = str(soup)
+
+        except Exception as e:
+            erros.append(f"Erro ao processar HTML: {e}")
+
+        # Cria o diretório de logs, se necessário, e salva os erros
+        os.makedirs(log_dir, exist_ok=True)
+        with open(log_file, "w", encoding="utf-8") as arquivo:
+            arquivo.write("\n".join(erros))
+        if erros:
+            print("Erros armazenados:", erros)
+
+        print("Nomes das turmas coletados:", nomes_turmas)
+        navegador.quit()
+        return resultado_final, atv, resultado_info
