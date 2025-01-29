@@ -40,11 +40,14 @@ def index():
 def login():
     return render_template("login.html")
 
+@app.route("/frequencia")
+def frequencia():
+    return render_template("logina.html")
+
 @app.route("/dashboard", methods=['POST'])
 def autenticar():
     usuario= request.form.get("usuario")
     senha= request.form.get("senha")
-    notasfaltas = request.form.get("notasfaltas")
     notas1, atividades, resultado_info = login (usuario, senha)
     notas2 = Markup(notas1)
     atividades2 = Markup(atividades)
@@ -56,6 +59,8 @@ def autenticar():
         return render_template("login.html", erro=erro)
     else:
         return render_template("dashboard.html", notas=notas2, atv=atividades2, info=resultado_info2)
+
+
 
 @app.route("/sobre")
 def sobre():
@@ -466,3 +471,4 @@ def login(usuario, senha):
     print("Nomes das turmas coletados:", nomes_turmas)
     navegador.quit()
     return resultado_final, atv, resultado_info
+

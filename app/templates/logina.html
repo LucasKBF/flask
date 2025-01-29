@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SigaaV2 - Login</title>
+        <link rel="stylesheet" href=".\static\login.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+        <!--  <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+ <script src="https://www.google.com/recaptcha/api.js" async defer></script> -->
+    </head>
+    <body>
+
+        {% include 'aceitartermos.virk' %}
+        {% include 'header.virk' %}
+        <div style="margin: 80px;">
+            <main class="login">
+                <form action="/dashboard" method="post">
+                    Usuarioa:<br> <input type="text" name="usuarioa"
+                        placeholder="Digite seu usuario" class="inaer"
+                        id="usuarioa"
+                        required><br><br>
+                    Senha: <br> <div class="form-group">
+                        <input type="password" id="senhaa"
+                            placeholder="Digite sua senha"
+                            name="senhaa" required>
+                        <br>
+                        <div class="checkboax">
+                            <input type="checkbox" id="mostrarSenhaa"
+                                onclick="toggleSenhaa()">
+                            <label style="margin-bottom: -0.1px;"
+                                for="mostrarSenhaa">Mostrar
+                                senha</label>
+                        </div>
+                        <br>
+                        <!-- Adicionando o widget reCAPTCHA 
+                        <div class="g-recaptcha"
+                            data-sitekey="6LfZmb8qAAAAANWSlBj1HyGbNM8GjAempwmB1WRC"></div>
+                        <br>-->
+                        <button class="botaodelogin"
+                            onclick="validarFormulario()"
+                            type="submit">Entrar</button>
+                    </form>
+                    <div id="loading" class="hidden">
+                        <div class="spinner"></div>
+                        <p class="details" id="loadingDetails">Preparando...</p>
+                    </div>
+                    {{ erro|safe }}
+                </main>
+
+            </body>
+            <footer>
+                <div>
+                    <h3>Contato</h3>
+                    <p><a
+                            href="mailto:sigaav2@gmail.com?subject=Suporte">sigaav2@gmail.com</a></p>
+                </div>
+                <div>
+                    <p> </p>
+                </div>
+            </footer>
+            {% include 'lisencafooter.virk' %}
+            .</a></h6>
+    <script>
+  function toggleSenhaa() {
+    const senhaa = document.getElementById("senhaa");
+    if (senhaa.type === "password") {
+      senhaa.type = "text";
+    } else {
+      senhaa.type = "password";
+    }
+  }
+
+  function loading() {
+    const loadingDiv = document.getElementById("loading");
+    loadingDiv.classList.remove("hidden");
+    const details = document.getElementById("loadingDetails");
+
+    // Remover conteúdo anterior
+    details.textContent = "";
+
+    // Adicionar textos com quebras de linha
+    details.appendChild(document.createTextNode("Conectando ao Sigaa..."));
+    details.appendChild(document.createElement("br")); 
+    details.appendChild(document.createTextNode("(Isso demora cerca de 1 minuto)"));
+
+    setTimeout(() => {
+      details.textContent = "Buscando Notas";
+    }, 127500);
+}
+  function validarFormulario() {
+    const usuarioa = document.getElementById("usuarioa").value.trim();
+    const senhaa = document.getElementById("senhaa").value.trim();
+
+
+    if (usuarioa === "" || senhaa === "") {
+      alert("Usuário e senhaa são obrigatórios.");
+      return false;
+    }
+
+    loading();
+    return true; // Permitir o envio do formulário
+  }
+</script>
+    <!--    const notasfaltas = document.getElementById("notasfaltas").checked ? "on" : "";-->
