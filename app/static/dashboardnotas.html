@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<!-- saved from url=(0035)http://172.16.144.51:5000/dashboard -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="sigaa.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="http://172.16.144.51:5000/static/favicon.ico" type="image/x-icon">
+  </head>
+  <body>
+    <style>
+
+    .botaodetermo{
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  /* Estilização do popup */
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      text-align: center;
+      z-index: 1000;
+    }
+
+    .popup h1 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .popup p {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .popup button {
+      padding: 10px 15px;
+      font-size: 14px;
+      color: #fff;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .popup button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Fundo escuro */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+
+    /* Esconder popup */
+    .hidden {
+      display: none;
+    }
+  </style>
+  <!-- Fundo escuro -->
+  <div class="overlay hidden" id="overlay"></div>
+
+  <!-- Popup dos termos -->
+  <div class="popup hidden" id="popup">
+    <h1>Termos de Serviço</h1>
+    <p>
+      Ao continuar utilizando este site, você concorda com os nossos <a href="http://172.16.144.51:5000/termosdeservico">Termos de Serviço</a>. 
+      Por favor, leia com atenção.
+    </p>
+    <button class="botaodetermo" id="agreeButton">Concordo</button>
+  </div>
+
+  <script>
+    // Verifica se o cookie já foi definido
+    if (document.cookie.includes("termsAccepted=true")) {
+      document.getElementById("popup").classList.add("hidden");
+      document.getElementById("overlay").classList.add("hidden");
+    }
+
+    // Quando o botão "Concordo" é clicado
+    document.getElementById("agreeButton").addEventListener("click", function () {
+      // Define um cookie válido por 30 dias
+      const expirationDate = new Date();
+      expirationDate.setDate(expirationDate.getDate() + 30);
+      document.cookie = `termsAccepted=true; expires=${expirationDate.toUTCString()}; path=/`;
+
+      // Esconde o popup e o fundo escuro
+      document.getElementById("popup").classList.add("hidden");
+      document.getElementById("overlay").classList.add("hidden");
+    });
+  </script>
+    
+
+<style>
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  header h1 {
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  header nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  header nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  header nav a.botao {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+  
+  header nav a:last-child {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+  
+  a:hover {
+    transform: scale(1.1);
+    border-radius: 5px;
+  }
+  .alink {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #00000000;
+    color: #000000;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .dropdown {
+    float: left;
+    overflow: hidden;
+  }
+  
+  .dropdown .dropbtn {
+    font-size: 16px;  
+    border: none;
+    outline: none;
+    color: rgb(0, 0, 0);
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+    
+  }
+  
+  .navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: rgba(137, 43, 226, 0.493);
+    border-radius: 10px;
+  }
+  
+  .dropdown-content {
+    border-radius: 10px;
+    display: none;
+    position: absolute;
+    background-color: #e2dfdf;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    margin-left: -30px;
+  }
+  
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .dropdown-content a:hover {
+    background-color:rgb(202, 188, 206);
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  </style>
+  
+  
+  <header class="navbar">
+      <h1><a class="alink" href="http://172.16.144.51:5000/" style="font-size: 30px;">SigaaV2</a></h1>
+      <nav>
+        <a class="alink" href="http://172.16.144.51:5000/contato">Contato</a>
+        <a class="alink" href="http://172.16.144.51:5000/atualizacoes">Atualizações</a>
+        <a class="alink" href="http://172.16.144.51:5000/sobre">Sobre</a>
+        <a class="alink" href="http://172.16.144.51:5000/seguran%C3%A7a">Segurança</a>
+        <a class="alink" href="http://172.16.144.51:5000/creditos">Creditos</a>
+        <div class="dropdown alink" style="cursor: pointer;">
+          <a class="alink" style="cursor: pointer;">Direitos Legais</a>
+          <div class="dropdown-content">
+            <a class="alink" href="http://172.16.144.51:5000/termosdeservico">Termos de Serviço</a>
+            <a class="alink" href="http://172.16.144.51:5000/politicadeprivacidade">Politica de Privacidade</a>
+            <a class="alink" href="http://172.16.144.51:5000/LICENSE">Lisença</a>
+          </div>
+        </div> 
+        <!--<a class="alink" href="/termosdeservico">Termos de Serviço</a>
+        <a class="alink" href="/politicadeprivacidade">Politica de Privacidade</a>-->
+        <a class="alink" href="http://172.16.144.51:5000/autenticar">Entrar</a>
+      </nav>
+    </header>
+    &gt;&gt;&gt;&gt;&gt;&gt;&gt; Stashed changes
+    <div class="hero">
+      <h2>SigaaV2</h2>
+      <p>Veja aqui as informações sobre sua conta no Sigaa.</p>
+      <br>
+      <p style="font-size: 18px; -webkit-text-fill-color: rgb(248, 206, 117);">Devido
+        a um erro do proprio SIGAA</p>
+      <p style="font-size: 18px; -webkit-text-fill-color: rgb(248, 206, 117);">As
+        faltas estarão Inconsistentes</p>
+    </div>
+    <div class="container">
+      <h1 class="title">informações da Conta</h1>
+      <div class="info">
+        <table>
+ <tbody>
+  <tr>
+   <td>
+    Matrícula:
+   </td>
+   <td>
+    202321002148
+   </td>
+  </tr>
+  <tr>
+   <td valign="top">
+    Curso:
+   </td>
+   <td>
+    TÉCNICO EM ELETRÔNICA INTEGRADO AO ENSINO MÉDIO [604]/FLN - Técnico - Integrado - Florianópolis -
+						T
+   </td>
+  </tr>
+  <tr>
+   <td>
+    Nível:
+   </td>
+   <td>
+    TÉCNICO
+   </td>
+  </tr>
+  <tr>
+   <td>
+    Status:
+   </td>
+   <td>
+    CURSANDO
+   </td>
+  </tr>
+  <tr>
+   <td>
+    E-Mail:
+   </td>
+   <td>
+    victor.s17@aluno.if...
+   </td>
+  </tr>
+  <tr>
+   <td>
+    Entrada:
+   </td>
+   <td>
+    2023.2
+   </td>
+  </tr>
+  <tr>
+   <td colspan="2">
+   </td>
+  </tr>
+  <tr>
+   <td colspan="2" style="text-align: center; font-style: italic">
+    Índices Acadêmicos
+   </td>
+  </tr>
+  <tr>
+   <td colspan="2">
+    <table width="100%">
+     <tbody>
+      <tr>
+      </tr>
+      <tr>
+       <td>
+        <acronym title="Média de Conclusão">
+         MC:
+        </acronym>
+       </td>
+       <td align="right">
+        <div style="margin-right:15px;">
+         7.4792
+        </div>
+       </td>
+       <td>
+        <acronym title="Índice de Rendimento Acadêmico">
+         IRA:
+        </acronym>
+       </td>
+       <td align="right">
+        <div style="margin-right:15px;">
+         7.225
+        </div>
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <acronym title="Índice de Eficiência em Carga Horária">
+         IECH:
+        </acronym>
+       </td>
+       <td align="right">
+        <div style="margin-right:15px;">
+         1.0
+        </div>
+       </td>
+       <td>
+        <acronym title="Índice de Eficiência em Períodos Letivos">
+         IEPL:
+        </acronym>
+       </td>
+       <td align="right">
+        <div style="margin-right:15px;">
+         0.8824
+        </div>
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <acronym title="Índice de Eficiência Acadêmica">
+         IEA:
+        </acronym>
+       </td>
+       <td align="right">
+        <div style="margin-right:15px;">
+         6.5996
+        </div>
+       </td>
+       <td>
+        <acronym title="Coeficiente de Aproveitamento Acadêmico">
+         CAA:
+        </acronym>
+       </td>
+       <td align="right">
+        <div style="margin-right:15px;">
+         0.7225
+        </div>
+       </td>
+      </tr>
+      <tr>
+       <td align="center" colspan="4">
+        <form action="http://172.16.144.51:5000/sigaa/portais/discente/discente.jsf" enctype="application/x-www-form-urlencoded" id="j_id_jsp_1383391995_182" method="post" name="j_id_jsp_1383391995_182">
+         <input name="j_id_jsp_1383391995_182" type="hidden" value="j_id_jsp_1383391995_182">
+        </form>
+       </td>
+      </tr>
+     </tbody>
+    </table>
+   </td>
+  </tr>
+ </tbody>
+</table>
+
+      </div>
+      <h1 class="title">Atividades e Tarefas</h1>
+      <p style="text-align: center;"> Serviço em manutenção. </p>
+      <h1 class="title">Notas</h1>
+      <strong>BIOLOGIA</strong><div class="notas" style="clear: both;">
+<table class="tabelaRelatorio" width="100%">
+<caption></caption>
+<thead>
+<tr>
+
+
+<th colspan="1" style="text-align: center">Resultado Parcial 1</th>
+<th colspan="1" style="text-align: center">Resultado Parcial 2</th>
+<th colspan="3" style="text-align: center">Resultado Parcial 3</th>
+<th class="nota" width="5%">Recuperação</th>
+<!-- In&#237;cio Custom Esig #73921 -->
+<th class="nota" width="5%">Resultado Final</th>
+<!-- Fim Custom Esig #73921 -->
+<th style="text-align: right;" width="5%">Faltas</th>
+</tr>
+<tr bgcolor="#C4D2EB" id="trAval">
+<th class="nota" id="unid">Nota</th>
+<th class="nota" id="unid">Nota</th>
+<th class="nota" id="aval_65129116">R1</th>
+<input id="abrevAval_65129116" type="hidden" value="R1">
+<input id="denAval_65129116" type="hidden" value="Relatório de Aula Prática 1: Jogo de Seleção Natural">
+<input id="notaAval_65129116" type="hidden" value="">
+<input id="pesoAval_65129116" type="hidden" value="1">
+<th class="nota" id="aval_65244279">A1</th>
+<input id="abrevAval_65244279" type="hidden" value="A1">
+<input id="denAval_65244279" type="hidden" value="Atividade 1: Roteiro de Classificação e Origem da Biodivers.">
+<input id="notaAval_65244279" type="hidden" value="">
+<input id="pesoAval_65244279" type="hidden" value="1">
+<th class="nota" id="unid">Nota</th>
+<th></th><th></th><th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="linhaPar linha">
+
+
+<td class="nota" style="border-right: 1px solid #888;">
+						7,0</td>
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<td class="nota">
+								8,0</td>
+<td class="nota">
+								9,0</td>
+<td class="nota" style="border-right: 1px solid #888;">
+						9,0</td>
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<!-- In&#237;cio Custom Esig #73921 -->
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<!-- Fim Custom Esig #73921 -->
+<td style="border-right: 1px solid #888; text-align:right;">
+				0</td>
+</tr>
+</tbody>
+</table>
+</div><br><br><br><br> <strong>ELETRICIDADE I</strong><div class="notas" style="clear: both;">
+<table class="tabelaRelatorio" width="100%">
+<caption></caption>
+<thead>
+<tr>
+
+
+<th colspan="1" style="text-align: right">Resultado Parcial 1</th>
+<th colspan="1" style="text-align: right">Resultado Parcial 2</th>
+<th colspan="1" style="text-align: right">Resultado Parcial 3</th>
+<th class="nota" width="5%">Recuperação</th>
+<!-- In&#237;cio Custom Esig #73921 -->
+<th class="nota" width="5%">Resultado Final</th>
+<!-- Fim Custom Esig #73921 -->
+<th style="text-align: right;" width="5%">Faltas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="linhaPar linha">
+
+
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<!-- In&#237;cio Custom Esig #73921 -->
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<!-- Fim Custom Esig #73921 -->
+<td style="border-right: 1px solid #888; text-align:right;">
+				0</td>
+</tr>
+</tbody>
+</table>
+</div><br><br><br><br> <strong>FILOSOFIA E SOCIOLOGIA</strong><div class="notas" style="clear: both;">
+<table class="tabelaRelatorio" width="100%">
+<caption></caption>
+<thead>
+<tr>
+
+
+<th colspan="1" style="text-align: right">Resultado Parcial 1</th>
+<th class="nota" width="5%">Recuperação</th>
+<!-- In&#237;cio Custom Esig #73921 -->
+<th class="nota" width="5%">Resultado Final</th>
+<!-- Fim Custom Esig #73921 -->
+<th style="text-align: right;" width="5%">Faltas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="linhaPar linha">
+
+
+<td class="nota" style="border-right: 1px solid #888;">
+						6,0</td>
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<!-- In&#237;cio Custom Esig #73921 -->
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<!-- Fim Custom Esig #73921 -->
+<td style="border-right: 1px solid #888; text-align:right;">
+				0</td>
+</tr>
+</tbody>
+</table>
+</div><br><br><br><br> <strong>FÍSICA</strong><div class="notas" style="clear: both;">
+<table class="tabelaRelatorio" width="100%">
+<caption></caption>
+<thead>
+<tr>
+
+
+<th colspan="2" style="text-align: center">Resultado Parcial 1</th>
+<th colspan="5" style="text-align: center">Resultado Parcial 2</th>
+<th class="nota" width="5%">Recuperação</th>
+<!-- In&#237;cio Custom Esig #73921 -->
+<th class="nota" width="5%">Resultado Final</th>
+<!-- Fim Custom Esig #73921 -->
+<th style="text-align: right;" width="5%">Faltas</th>
+</tr>
+<tr bgcolor="#C4D2EB" id="trAval">
+<th class="nota" id="aval_65757041">LAB</th>
+<input id="abrevAval_65757041" type="hidden" value="LAB">
+<input id="denAval_65757041" type="hidden" value="LABORATORIO">
+<input id="notaAval_65757041" type="hidden" value="">
+<input id="pesoAval_65757041" type="hidden" value="1">
+<th class="nota" id="unid">Nota</th>
+<th class="nota" id="aval_65757087">TST</th>
+<input id="abrevAval_65757087" type="hidden" value="TST">
+<input id="denAval_65757087" type="hidden" value="TESTES">
+<input id="notaAval_65757087" type="hidden" value="">
+<input id="pesoAval_65757087" type="hidden" value="1">
+<th class="nota" id="aval_65757110">PR01</th>
+<input id="abrevAval_65757110" type="hidden" value="PR01">
+<input id="denAval_65757110" type="hidden" value="prova 01">
+<input id="notaAval_65757110" type="hidden" value="">
+<input id="pesoAval_65757110" type="hidden" value="1">
+<th class="nota" id="aval_65757133">PR02</th>
+<input id="abrevAval_65757133" type="hidden" value="PR02">
+<input id="denAval_65757133" type="hidden" value="prova 02">
+<input id="notaAval_65757133" type="hidden" value="">
+<input id="pesoAval_65757133" type="hidden" value="1">
+<th class="nota" id="aval_65757156">PR03</th>
+<input id="abrevAval_65757156" type="hidden" value="PR03">
+<input id="denAval_65757156" type="hidden" value="prova 03">
+<input id="notaAval_65757156" type="hidden" value="">
+<input id="pesoAval_65757156" type="hidden" value="1">
+<th class="nota" id="unid">Nota</th>
+<th></th><th></th><th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="linhaPar linha">
+
+
+<td class="nota">
+</td>
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<td class="nota">
+</td>
+<td class="nota">
+								7,0</td>
+<td class="nota">
+								7,0</td>
+<td class="nota">
+</td>
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<!-- In&#237;cio Custom Esig #73921 -->
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<!-- Fim Custom Esig #73921 -->
+<td style="border-right: 1px solid #888; text-align:right;">
+				0</td>
+</tr>
+</tbody>
+</table>
+</div><br><br><br><br> <strong>INGLÊS FASE 3 NIVEL 3</strong><div class="notas" style="clear: both;">
+<table class="tabelaRelatorio" width="100%">
+<caption></caption>
+<thead>
+<tr>
+
+
+<th colspan="1" style="text-align: right">Resultado Parcial 1</th>
+<th class="nota" width="5%">Recuperação</th>
+<!-- In&#237;cio Custom Esig #73921 -->
+<th class="nota" width="5%">Resultado Final</th>
+<!-- Fim Custom Esig #73921 -->
+<th style="text-align: right;" width="5%">Faltas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="linhaPar linha">
+
+
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<!-- In&#237;cio Custom Esig #73921 -->
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<!-- Fim Custom Esig #73921 -->
+<td style="border-right: 1px solid #888; text-align:right;">
+				0</td>
+</tr>
+</tbody>
+</table>
+</div><br><br><br><br> <strong>MATEMÁTICA</strong><div class="notas" style="clear: both;">
+<table class="tabelaRelatorio" width="100%">
+<caption></caption>
+<thead>
+<tr>
+
+
+<th colspan="5" style="text-align: center">Resultado Parcial 1</th>
+<th class="nota" width="5%">Recuperação</th>
+<!-- In&#237;cio Custom Esig #73921 -->
+<th class="nota" width="5%">Resultado Final</th>
+<!-- Fim Custom Esig #73921 -->
+<th style="text-align: right;" width="5%">Faltas</th>
+</tr>
+<tr bgcolor="#C4D2EB" id="trAval">
+<th class="nota" id="aval_65141982">E1·1</th>
+<input id="abrevAval_65141982" type="hidden" value="E1·1">
+<input id="denAval_65141982" type="hidden" value="Experimento 1">
+<input id="notaAval_65141982" type="hidden" value="">
+<input id="pesoAval_65141982" type="hidden" value="1">
+<th class="nota" id="aval_65142007">P1·3</th>
+<input id="abrevAval_65142007" type="hidden" value="P1·3">
+<input id="denAval_65142007" type="hidden" value="Prova 1">
+<input id="notaAval_65142007" type="hidden" value="">
+<input id="pesoAval_65142007" type="hidden" value="3">
+<th class="nota" id="aval_65142031">E2·1</th>
+<input id="abrevAval_65142031" type="hidden" value="E2·1">
+<input id="denAval_65142031" type="hidden" value="Experimento 2">
+<input id="notaAval_65142031" type="hidden" value="">
+<input id="pesoAval_65142031" type="hidden" value="1">
+<th class="nota" id="aval_65142055">P2·5</th>
+<input id="abrevAval_65142055" type="hidden" value="P2·5">
+<input id="denAval_65142055" type="hidden" value="Prova 2">
+<input id="notaAval_65142055" type="hidden" value="">
+<input id="pesoAval_65142055" type="hidden" value="5">
+<th class="nota" id="unid">Nota</th>
+<th></th><th></th><th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="linhaPar linha">
+
+
+<td class="nota">
+								7,0</td>
+<td class="nota">
+								7,0</td>
+<td class="nota">
+</td>
+<td class="nota">
+</td>
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<!-- In&#237;cio Custom Esig #73921 -->
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<!-- Fim Custom Esig #73921 -->
+<td style="border-right: 1px solid #888; text-align:right;">
+				0</td>
+</tr>
+</tbody>
+</table>
+</div><br><br><br><br> <strong>MÚSICA 03</strong><div class="notas" style="clear: both;">
+<table class="tabelaRelatorio" width="100%">
+<caption></caption>
+<thead>
+<tr>
+
+
+<th colspan="1" style="text-align: right">Resultado Parcial 1</th>
+<th colspan="1" style="text-align: right">Resultado Parcial 2</th>
+<th colspan="1" style="text-align: right">Resultado Parcial 3</th>
+<th colspan="1" style="text-align: right">Resultado Parcial 4</th>
+<th class="nota" width="5%">Recuperação</th>
+<!-- In&#237;cio Custom Esig #73921 -->
+<th class="nota" width="5%">Resultado Final</th>
+<!-- Fim Custom Esig #73921 -->
+<th style="text-align: right;" width="5%">Faltas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="linhaImpar linha">
+
+
+<td class="nota" style="border-right: 1px solid #888;">
+						10,0</td>
+<td class="nota" style="border-right: 1px solid #888;">
+						10,0</td>
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<!-- In&#237;cio Custom Esig #73921 -->
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<!-- Fim Custom Esig #73921 -->
+<td style="border-right: 1px solid #888; text-align:right;">
+				0</td>
+</tr>
+</tbody>
+</table>
+</div><br><br><br><br> <strong>PORTUGUÊS E HISTÓRIA DA LITERATURA BRASILEIRA</strong><div class="notas" style="clear: both;">
+<table class="tabelaRelatorio" width="100%">
+<caption></caption>
+<thead>
+<tr>
+
+
+<th colspan="1" style="text-align: right">Resultado Parcial 1</th>
+<th class="nota" width="5%">Recuperação</th>
+<!-- In&#237;cio Custom Esig #73921 -->
+<th class="nota" width="5%">Resultado Final</th>
+<!-- Fim Custom Esig #73921 -->
+<th style="text-align: right;" width="5%">Faltas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="linhaPar linha">
+
+
+<td class="nota" style="border-right: 1px solid #888;">
+						6,0</td>
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<!-- In&#237;cio Custom Esig #73921 -->
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<!-- Fim Custom Esig #73921 -->
+<td style="border-right: 1px solid #888; text-align:right;">
+				0</td>
+</tr>
+</tbody>
+</table>
+</div><br><br><br><br> <strong>QUÍMICA</strong><div class="notas" style="clear: both;">
+<table class="tabelaRelatorio" width="100%">
+<caption></caption>
+<thead>
+<tr>
+
+
+<th colspan="8" style="text-align: center">Resultado Parcial 1</th>
+<th class="nota" width="5%">Recuperação</th>
+<!-- In&#237;cio Custom Esig #73921 -->
+<th class="nota" width="5%">Resultado Final</th>
+<!-- Fim Custom Esig #73921 -->
+<th style="text-align: right;" width="5%">Faltas</th>
+</tr>
+<tr bgcolor="#C4D2EB" id="trAval">
+<th class="nota" id="aval_64067723">A1</th>
+<input id="abrevAval_64067723" type="hidden" value="A1">
+<input id="denAval_64067723" type="hidden" value="Avaliação 1">
+<input id="notaAval_64067723" type="hidden" value="">
+<input id="pesoAval_64067723" type="hidden" value="1">
+<th class="nota" id="aval_64067904">A2</th>
+<input id="abrevAval_64067904" type="hidden" value="A2">
+<input id="denAval_64067904" type="hidden" value="Avaliação 2">
+<input id="notaAval_64067904" type="hidden" value="">
+<input id="pesoAval_64067904" type="hidden" value="1">
+<th class="nota" id="aval_64068043">A3</th>
+<input id="abrevAval_64068043" type="hidden" value="A3">
+<input id="denAval_64068043" type="hidden" value="Avaliação 3">
+<input id="notaAval_64068043" type="hidden" value="">
+<input id="pesoAval_64068043" type="hidden" value="1">
+<th class="nota" id="aval_64637090">Lab1</th>
+<input id="abrevAval_64637090" type="hidden" value="Lab1">
+<input id="denAval_64637090" type="hidden" value="Prática 1 - Reação relógio">
+<input id="notaAval_64637090" type="hidden" value="">
+<input id="pesoAval_64637090" type="hidden" value="1">
+<th class="nota" id="aval_64756031">Lab2</th>
+<input id="abrevAval_64756031" type="hidden" value="Lab2">
+<input id="denAval_64756031" type="hidden" value="Prática 2 - Fatores que afetam a velocidade de uma reação">
+<input id="notaAval_64756031" type="hidden" value="">
+<input id="pesoAval_64756031" type="hidden" value="1">
+<th class="nota" id="aval_65308890">Lab3</th>
+<input id="abrevAval_65308890" type="hidden" value="Lab3">
+<input id="denAval_65308890" type="hidden" value="Equilíbrio químico">
+<input id="notaAval_65308890" type="hidden" value="">
+<input id="pesoAval_65308890" type="hidden" value="1">
+<th class="nota" id="aval_65526560">Lab4</th>
+<input id="abrevAval_65526560" type="hidden" value="Lab4">
+<input id="denAval_65526560" type="hidden" value="Prática 4 - Equilíbrio iônico - pH e pOH">
+<input id="notaAval_65526560" type="hidden" value="">
+<input id="pesoAval_65526560" type="hidden" value="1">
+<th class="nota" id="unid">Nota</th>
+<th></th><th></th><th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="linhaPar linha">
+
+
+<td class="nota">
+								9,0</td>
+<td class="nota">
+								7,0</td>
+<td class="nota">
+</td>
+<td class="nota">
+								9,0</td>
+<td class="nota">
+								10,0</td>
+<td class="nota">
+								8,0</td>
+<td class="nota">
+</td>
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<!-- In&#237;cio Custom Esig #73921 -->
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<!-- Fim Custom Esig #73921 -->
+<td style="border-right: 1px solid #888; text-align:right;">
+				0</td>
+</tr>
+</tbody>
+</table>
+</div><br><br><br><br> <strong>VOLEIBOL MISTO 03</strong><div class="notas" style="clear: both;">
+<table class="tabelaRelatorio" width="100%">
+<caption></caption>
+<thead>
+<tr>
+
+
+<th class="nota" width="5%">Recuperação</th>
+<!-- In&#237;cio Custom Esig #73921 -->
+<th class="nota" width="5%">Resultado Final</th>
+<!-- Fim Custom Esig #73921 -->
+<th style="text-align: right;" width="5%">Faltas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="linhaImpar linha">
+
+
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<!-- In&#237;cio Custom Esig #73921 -->
+<td class="nota" style="border-right: 1px solid #888;">
+</td>
+<!-- Fim Custom Esig #73921 -->
+<td style="border-right: 1px solid #888; text-align:right;">
+				0</td>
+</tr>
+</tbody>
+</table>
+</div><br><br><br><br>
+      <footer>
+        <div>
+          <h3>Horarios de Manutenção</h3>
+          <p>Instável devido a o site estar em desenvolvimento</p>
+          <!--<p>segunda-feira—sexta-feira</p>
+          <p>18h — 19h</p>-->
+        </div>
+        <div>
+          <h3>Contato</h3>
+          <p><a href="mailto:sigaav2@gmail.com?subject=Suporte">sigaav2@gmail.com</a></p>
+
+        </div>
+      </footer>
+    
+    <h6 style="text-align: center ;"><p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/LucasKBF/SigaaV2">SigaaV2</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/LucasKBF">Lucas KBF</a> &amp; <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/Nosferk">Nosferk</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="./Dashboard_files/cc.svg" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="./Dashboard_files/by.svg" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="./Dashboard_files/nc.svg" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="./Dashboard_files/nd.svg" alt=""></a></p></h6>
+
+  </div></body></html>

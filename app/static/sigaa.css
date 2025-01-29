@@ -106,3 +106,31 @@ a {
 a:hover {
     color: #9643f5;
 }
+
+
+.listing {
+    margin: 2rem auto;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    overflow-x: auto;
+    background: linear-gradient(to bottom right, #e2d3ff6d, #9f3ff27c, #3c027e8e);
+    padding: 20px 40px;
+    font-size: 18px;
+    border: 2px solid rgb(119, 0, 255);
+    display: flex;
+    flex-direction: column; /* Coloca os itens em uma coluna (verticalmente) */
+    align-items: center; /* Centraliza os itens horizontalmente */
+    text-align: center;
+    text-shadow: rgb(91, 23, 122) 1px 1px 1px ;
+}
+.presente {
+    color: green;
+}
+.falta {
+    color: red;
+}
+.nao-informada {
+    color: orange;
+}
